@@ -124,10 +124,12 @@ const aboutDetails = [
   },
 ]
 
+const basePath = import.meta.env.BASE_URL
+
 const heroPhotos = [
-  { src: '/assets/image_4215ea.jpg', position: '52% 30%' },
-  { src: '/assets/1000075972.jpg', position: '56% 24%' },
-  { src: '/assets/1000075973.jpg', position: '54% 20%' },
+  { src: `${basePath}assets/image_4215ea.jpg`, position: '52% 30%' },
+  { src: `${basePath}assets/1000075972.jpg`, position: '56% 24%' },
+  { src: `${basePath}assets/1000075973.jpg`, position: '54% 20%' },
 ]
 
 const sectionTitleClass =
