@@ -434,11 +434,10 @@ export default function App() {
             <div className="rounded-[1.75rem] border border-neon/15 bg-[radial-gradient(circle_at_top_right,rgba(63,169,255,0.16),transparent_38%),linear-gradient(180deg,rgba(17,25,42,0.95),rgba(7,10,16,0.95))] p-6 shadow-neon sm:p-10">
               <p className="text-[0.65rem] uppercase tracking-[0.18em] text-neonSoft sm:text-xs sm:tracking-[0.28em]">Ready for collaboration</p>
               <h3 className="mt-4 text-2xl font-semibold text-textmain sm:text-3xl md:text-4xl">
-                A cleaner digital identity for serious opportunities.
+                Ready to build a cleaner digital identity?
               </h3>
               <p className="mt-5 max-w-xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8 md:text-lg">
-                If you want a portfolio that feels focused, modern, and technically credible, the monochrome blue-black
-                direction gives it precision, depth, and a stronger professional finish.
+                If you are looking for serious opportunities and need a project that feels focused, modern, and technically credible, I'd love to help. Let's collaborate to bring the same precision, depth, and professional finish you see here to your next venture. Reach out below to get started.
               </p>
 
               <form className="mt-8 grid gap-4">
