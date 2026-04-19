@@ -127,13 +127,13 @@ const aboutDetails = [
 const basePath = import.meta.env.BASE_URL
 
 const heroPhotos = [
-  { src: `${basePath}assets/image_4215ea.jpg`, position: '52% 30%' },
+  { src: `${basePath}assets/image_4215ea.png`, position: '52% 30%' },
   { src: `${basePath}assets/1000075972.jpg`, position: '56% 24%' },
   { src: `${basePath}assets/1000075973.jpg`, position: '54% 20%' },
 ]
 
 const sectionTitleClass =
-  'mb-8 text-3xl font-semibold uppercase tracking-[0.28em] text-textmain md:text-4xl'
+  'mb-8 text-2xl font-semibold uppercase tracking-[0.16em] text-textmain sm:text-3xl sm:tracking-[0.22em] md:text-4xl md:tracking-[0.28em]'
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home')
@@ -218,18 +218,18 @@ export default function App() {
       <div className="cursor-spotlight" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.18),transparent_30%),radial-gradient(circle_at_top_right,rgba(123,200,255,0.1),transparent_24%),linear-gradient(to_bottom,rgba(5,7,11,0.3),rgba(5,7,11,0.96))]" />
       <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-ink/70 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-8 lg:px-12">
-          <a href="#home" className="text-2xl font-semibold tracking-[0.28em] text-textmain">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-8 sm:py-5 lg:px-12">
+          <a href="#home" className="text-xl font-semibold tracking-[0.2em] text-textmain sm:text-2xl sm:tracking-[0.28em]">
             Aer<span className="text-neon">.Cal</span>
           </a>
-          <nav>
-            <ul className="flex flex-wrap justify-end gap-2 text-[0.7rem] uppercase tracking-[0.2em] text-textmuted sm:gap-4 sm:text-xs">
+          <nav className="w-full overflow-x-auto pb-1 sm:w-auto sm:overflow-visible sm:pb-0">
+            <ul className="flex min-w-max flex-nowrap gap-2 text-[0.62rem] uppercase tracking-[0.14em] text-textmuted sm:min-w-0 sm:flex-wrap sm:justify-end sm:gap-4 sm:text-xs sm:tracking-[0.2em]">
               {navLinks.map((link) => {
                 const target = link.toLowerCase()
                 return (
                   <li key={link}>
                     <a
-                      className={`rounded-full border px-3 py-2 transition-all duration-300 ${
+                      className={`rounded-full border px-2.5 py-1.5 transition-all duration-300 sm:px-3 sm:py-2 ${
                         activeSection === target
                           ? 'border-neon/40 bg-neon/10 text-textmain shadow-neon'
                           : 'border-white/5 bg-white/3 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:text-textmain hover:shadow-neon'
@@ -250,40 +250,40 @@ export default function App() {
       <main className="relative z-10">
         <section
           id="home"
-          className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center gap-12 px-4 pb-16 pt-28 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-12"
+          className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center gap-10 px-4 pb-14 pt-36 sm:gap-12 sm:px-8 sm:pt-32 lg:flex-row lg:items-center lg:justify-between lg:px-12"
         >
           <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-neon/20 bg-panel/80 px-4 py-2 text-xs uppercase tracking-[0.28em] text-neonSoft shadow-neon backdrop-blur">
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-neon/20 bg-panel/80 px-3 py-2 text-[0.62rem] uppercase tracking-[0.16em] text-neonSoft shadow-neon backdrop-blur sm:px-4 sm:text-xs sm:tracking-[0.28em]">
               <span className="h-2 w-2 rounded-full bg-neon shadow-neon" />
               System Admin & Security Ready
             </div>
-            <h1 className="max-w-3xl text-5xl font-semibold leading-tight md:text-7xl">
+            <h1 className="max-w-3xl text-4xl font-semibold leading-[1.06] sm:text-5xl md:text-7xl">
               AARON L. CALUPITAN
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-textmuted md:text-xl">
+            <p className="mt-6 max-w-2xl text-base leading-7 text-textmuted sm:text-lg sm:leading-8 md:text-xl">
               IT Professional &amp; Graduating IT Student (Aer.Cal). Specializing in Software Development, IT Infrastructure.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
               <a
                 href="#contact"
-                className="rounded-full border border-neon bg-neon px-7 py-3 font-semibold text-ink shadow-neon transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
+                className="w-full rounded-full border border-neon bg-neon px-7 py-3 text-center font-semibold text-ink shadow-neon transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft sm:w-auto"
               >
                 Initiate Contact
               </a>
               <a
                 href="#skills"
-                className="rounded-full border border-white/10 bg-white/5 px-7 py-3 font-semibold text-textmain transition-all duration-300 hover:border-neon/40 hover:bg-neon/10"
+                className="w-full rounded-full border border-white/10 bg-white/5 px-7 py-3 text-center font-semibold text-textmain transition-all duration-300 hover:border-neon/40 hover:bg-neon/10 sm:w-auto"
               >
                 View Capabilities
               </a>
             </div>
           </div>
 
-          <div className="w-full max-w-sm md:max-w-md lg:w-2/5">
+          <div className="w-full max-w-sm sm:max-w-md lg:w-2/5">
             <div className="group relative overflow-hidden rounded-[2rem] border border-neon/20 bg-panel/85 p-3 shadow-neon backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-neon/40 hover:shadow-[0_0_32px_rgba(63,169,255,0.42)]">
               <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(63,169,255,0.14),transparent_40%,transparent_60%,rgba(63,169,255,0.08))]" />
-              <div className="relative h-[420px] w-full overflow-hidden rounded-[1.5rem]">
+              <div className="relative h-[320px] w-full overflow-hidden rounded-[1.5rem] sm:h-[380px] md:h-[420px]">
                 {heroPhotos.map((photo, index) => (
                   <img
                     key={photo.src}
@@ -296,7 +296,7 @@ export default function App() {
                   />
                 ))}
               </div>
-              <div className="absolute left-5 top-5 rounded-full border border-neon/25 bg-ink/70 px-3 py-1 text-[0.65rem] uppercase tracking-[0.22em] text-neonSoft backdrop-blur">
+              <div className="absolute left-4 top-4 rounded-full border border-neon/25 bg-ink/70 px-3 py-1 text-[0.56rem] uppercase tracking-[0.16em] text-neonSoft backdrop-blur sm:left-5 sm:top-5 sm:text-[0.65rem] sm:tracking-[0.22em]">
                 Command Profile
               </div>
               <div className="pointer-events-none absolute -inset-x-10 bottom-6 h-8 -rotate-6 bg-neon/10 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -304,7 +304,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-8 lg:px-12">
+        <section id="about" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>About Me</h2>
           <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="rounded-[1.75rem] border border-white/5 bg-panel/80 p-7 shadow-[0_18px_50px_rgba(0,0,0,0.25)] backdrop-blur-sm sm:p-10">
@@ -322,13 +322,15 @@ export default function App() {
               {aboutDetails.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-white/5 bg-panel/80 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-neon/30 hover:bg-panelSoft hover:shadow-neon"
+                  className="rounded-2xl border border-white/5 bg-panel/80 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-neon/30 hover:bg-panelSoft hover:shadow-neon sm:p-6"
                 >
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-neon/25 bg-neon/10 text-neonSoft">
                     <span className="h-5 w-5">{item.icon}</span>
                   </div>
-                  <p className="text-3xl font-semibold text-neonSoft">{item.value}</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.22em] text-textmuted">{item.label}</p>
+                  <p className="break-words text-2xl font-semibold text-neonSoft sm:text-3xl">{item.value}</p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.16em] text-textmuted sm:text-sm sm:tracking-[0.22em]">
+                    {item.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -338,7 +340,7 @@ export default function App() {
         <section
           id="skills"
           ref={skillsSectionRef}
-          className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-8 lg:px-12"
+          className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12"
         >
           <h2 className={sectionTitleClass}>Core Capabilities</h2>
           <div className="grid gap-5 md:grid-cols-3">
@@ -374,28 +376,28 @@ export default function App() {
           </div>
         </section>
 
-        <section id="badges" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-8 lg:px-12">
+        <section id="badges" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Credentials & Works</h2>
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {badges.map((badge) => (
               <div
                 key={badge.title}
-                className="group rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.9))] p-8 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.35)]"
+                className="group rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.9))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.35)] sm:p-8"
               >
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-ink/80 text-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-neon group-hover:text-ink">
                   {badge.icon}
                 </div>
-                <h3 className="text-2xl font-semibold text-textmain">{badge.title}</h3>
+                <h3 className="text-xl font-semibold text-textmain sm:text-2xl">{badge.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-textmuted">{badge.description}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="contact" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-8 lg:px-12">
+        <section id="contact" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Contact</h2>
           <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="rounded-[1.75rem] border border-white/5 bg-panel/80 p-7 backdrop-blur-sm sm:p-10">
+            <div className="rounded-[1.75rem] border border-white/5 bg-panel/80 p-6 backdrop-blur-sm sm:p-10">
               <p className="text-base leading-8 text-textmuted md:text-lg">
                 Looking to fortify your IT infrastructure or need a dedicated professional for your next project?
                 This is the place to reach out.
@@ -403,11 +405,11 @@ export default function App() {
               <div className="mt-8 space-y-4">
                 <a
                   href="mailto:aaroncalupitan2@gmail.com"
-                  className="block rounded-2xl border border-white/8 bg-white/3 px-5 py-4 text-sm uppercase tracking-[0.22em] text-textmain transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:shadow-neon"
+                  className="block break-all rounded-2xl border border-white/8 bg-white/3 px-4 py-4 text-xs uppercase tracking-[0.14em] text-textmain transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:shadow-neon sm:px-5 sm:text-sm sm:tracking-[0.22em]"
                 >
                   aaroncalupitan2@gmail.com
                 </a>
-                <div className="rounded-2xl border border-white/8 bg-white/3 px-5 py-4 text-sm uppercase tracking-[0.22em] text-textmain">
+                <div className="rounded-2xl border border-white/8 bg-white/3 px-4 py-4 text-xs uppercase tracking-[0.14em] text-textmain sm:px-5 sm:text-sm sm:tracking-[0.22em]">
                   Santa Cruz, Laguna, Philippines
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -417,7 +419,7 @@ export default function App() {
                       href={social.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="group flex items-center gap-3 rounded-2xl border border-white/8 bg-white/3 px-5 py-4 text-sm uppercase tracking-[0.18em] text-textmain transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:shadow-neon"
+                      className="group flex items-center gap-3 rounded-2xl border border-white/8 bg-white/3 px-4 py-4 text-xs uppercase tracking-[0.1em] text-textmain transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:shadow-neon sm:px-5 sm:text-sm sm:tracking-[0.18em]"
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-full border border-neon/20 bg-neon/10 text-neonSoft transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                         <span className="h-5 w-5">{social.icon}</span>
@@ -429,12 +431,12 @@ export default function App() {
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] border border-neon/15 bg-[radial-gradient(circle_at_top_right,rgba(63,169,255,0.16),transparent_38%),linear-gradient(180deg,rgba(17,25,42,0.95),rgba(7,10,16,0.95))] p-7 shadow-neon sm:p-10">
-              <p className="text-xs uppercase tracking-[0.28em] text-neonSoft">Ready for collaboration</p>
-              <h3 className="mt-4 text-3xl font-semibold text-textmain md:text-4xl">
+            <div className="rounded-[1.75rem] border border-neon/15 bg-[radial-gradient(circle_at_top_right,rgba(63,169,255,0.16),transparent_38%),linear-gradient(180deg,rgba(17,25,42,0.95),rgba(7,10,16,0.95))] p-6 shadow-neon sm:p-10">
+              <p className="text-[0.65rem] uppercase tracking-[0.18em] text-neonSoft sm:text-xs sm:tracking-[0.28em]">Ready for collaboration</p>
+              <h3 className="mt-4 text-2xl font-semibold text-textmain sm:text-3xl md:text-4xl">
                 A cleaner digital identity for serious opportunities.
               </h3>
-              <p className="mt-5 max-w-xl text-base leading-8 text-textmuted md:text-lg">
+              <p className="mt-5 max-w-xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8 md:text-lg">
                 If you want a portfolio that feels focused, modern, and technically credible, the monochrome blue-black
                 direction gives it precision, depth, and a stronger professional finish.
               </p>
@@ -443,17 +445,17 @@ export default function App() {
                 <input
                   type="text"
                   placeholder="Name"
-                  className="w-full rounded-2xl border border-white/8 bg-ink/70 px-5 py-4 text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon"
+                  className="w-full rounded-2xl border border-white/8 bg-ink/70 px-4 py-3.5 text-sm text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon sm:px-5 sm:py-4 sm:text-base"
                 />
                 <input
                   type="email"
                   placeholder="Email"
-                  className="w-full rounded-2xl border border-white/8 bg-ink/70 px-5 py-4 text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon"
+                  className="w-full rounded-2xl border border-white/8 bg-ink/70 px-4 py-3.5 text-sm text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon sm:px-5 sm:py-4 sm:text-base"
                 />
                 <textarea
                   rows="4"
                   placeholder="Message"
-                  className="w-full rounded-2xl border border-white/8 bg-ink/70 px-5 py-4 text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon"
+                  className="w-full rounded-2xl border border-white/8 bg-ink/70 px-4 py-3.5 text-sm text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon sm:px-5 sm:py-4 sm:text-base"
                 />
                 <button
                   type="button"

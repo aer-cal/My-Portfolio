@@ -15,6 +15,10 @@ body,
   min-height: 100%;
 }
 
+#root {
+  overflow-x: clip;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -62,4 +66,17 @@ body::before {
     transparent 62%
   );
   transition: background 140ms ease-out;
+}
+
+@media (max-width: 640px) {
+  body::before {
+    background-size: 40px 40px;
+    opacity: 0.3;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-spotlight {
+    display: none;
+  }
 }
