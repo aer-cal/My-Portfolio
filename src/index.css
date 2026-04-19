@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cursor-x: 50vw;
+  --cursor-y: 50vh;
+  --cursor-size: 360px;
+  --cursor-strength: 0.13;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(63, 169, 255, 0.14), transparent 30%),
+    radial-gradient(circle at top right, rgba(123, 200, 255, 0.08), transparent 24%),
+    linear-gradient(180deg, #05070b 0%, #070b12 42%, #05070b 100%);
+  color: #e5eefc;
+  font-family: Bahnschrift, 'Segoe UI', sans-serif;
+}
+
+body {
+  @apply bg-ink text-textmain antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(63, 169, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 169, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at center, black, transparent 82%);
+  opacity: 0.45;
+}
+
+::selection {
+  background: rgba(63, 169, 255, 0.35);
+  color: #f4f9ff;
+}
+
+.cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    var(--cursor-size) circle at var(--cursor-x) var(--cursor-y),
+    rgba(63, 169, 255, var(--cursor-strength)),
+    transparent 62%
+  );
+  transition: background 140ms ease-out;
+}
