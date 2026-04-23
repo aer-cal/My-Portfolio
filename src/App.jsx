@@ -127,7 +127,7 @@ const aboutDetails = [
 const basePath = import.meta.env.BASE_URL
 
 const heroPhotos = [
-  { src: `${basePath}assets/Screenshot 2026-04-23 092345.png`, position: '52% 30%' },
+  { src: `${basePath}assets/image_4215ea.png`, position: '52% 30%' },
   { src: `${basePath}assets/1000075972.jpg`, position: '56% 24%' },
   { src: `${basePath}assets/1000075973.jpg`, position: '54% 20%' },
 ]
