@@ -41,7 +41,7 @@ This portfolio has been migrated from static HTML/CSS into a React app powered b
 
 A modern, interactive, and professionally designed portfolio website showcasing skills, experience, and certifications. Built with pure HTML, CSS, and JavaScript.
 
-![Portfolio Screenshot](assets/Screenshot 2026-04-23 092345.png)
+![Portfolio Screenshot](public/assets/Screenshot 2026-04-23 092345.png)
 
 ## Features
 
