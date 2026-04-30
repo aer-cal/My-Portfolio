@@ -28,16 +28,19 @@ const badges = [
     icon: '🛡️',
     title: 'Cisco Linux Essentials',
     description: 'Professional badge verifying fundamental knowledge of Linux systems and the command line.',
+    href: 'https://www.credly.com/badges/bdd4ddfc-874a-4561-b96c-58612fc56133/public_url',
   },
   {
     icon: '⚙️',
     title: 'Cisco OS Basics',
     description: 'Certification covering core operating system concepts, installation, and troubleshooting.',
+    href: 'https://www.credly.com/badges/7e033bd7-d843-4f88-b7b6-36d3733c6f5e/public_url',
   },
   {
     icon: '💻',
-    title: 'MediCast Capstone',
-    description: 'Health profiling and forecast risk monitoring system developed with structured black-box testing.',
+    title: 'Cybersecurity Specialist',
+    description: 'IT Specialist certification demonstrating expertise in cybersecurity threats, risk mitigation, and secure infrastructure.',
+    href: 'https://www.credly.com/badges/d3c48501-d376-4259-9355-13dd8ed93b48/public_url',
   },
 ]
 
@@ -380,16 +383,19 @@ export default function App() {
           <h2 className={sectionTitleClass}>Credentials & Works</h2>
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {badges.map((badge) => (
-              <div
+              <a
                 key={badge.title}
-                className="group rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.9))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.35)] sm:p-8"
+                href={badge.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.9))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.35)] sm:p-8 cursor-pointer"
               >
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-ink/80 text-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-neon group-hover:text-ink">
                   {badge.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-textmain sm:text-2xl">{badge.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-textmuted">{badge.description}</p>
-              </div>
+              </a>
             ))}
           </div>
         </section>
