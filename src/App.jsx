@@ -23,6 +23,8 @@ const skillCards = [
   },
 ]
 
+const basePath = import.meta.env.BASE_URL
+
 const badges = [
   {
     icon: `${basePath}assets/LinuxBadge.png`,
@@ -126,8 +128,6 @@ const aboutDetails = [
     ),
   },
 ]
-
-const basePath = import.meta.env.BASE_URL
 
 const heroPhotos = [
   { src: `${basePath}assets/image_4215ea.png`, position: '52% 30%' },
