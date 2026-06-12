@@ -436,24 +436,38 @@ export default function App() {
         <section id="featured-work" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
-            <div className="relative mx-auto max-w-5xl">
-              <div className="relative flex items-center justify-between gap-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCarouselIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)
-                    setDetailsVisible(false)
-                  }}
-                  className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
-                  aria-label="Previous"
-                >
-                  ‹
-                </button>
+            <div className="relative mx-auto">
+              <div className="relative flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6">
+                <div className="w-full lg:w-auto flex flex-col gap-3 lg:gap-4 order-2 lg:order-1">
+                  {featuredWorks.map((w, i) => (
+                    <button
+                      key={w.title}
+                      onClick={() => {
+                        setCarouselIndex(i)
+                        setDetailsVisible(true)
+                      }}
+                      onMouseEnter={() => {
+                        setCarouselIndex(i)
+                        setDetailsVisible(true)
+                      }}
+                      onMouseLeave={() => setDetailsVisible(false)}
+                      className={`h-20 w-32 lg:h-24 lg:w-36 overflow-hidden rounded-lg border transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
+                        i === carouselIndex ? 'border-neon/60 ring-2 ring-neon/20 scale-110 shadow-neon' : 'border-white/8 hover:border-neon/40'
+                      }`}
+                      aria-label={`Show ${w.title}`}
+                      type="button"
+                    >
+                      <img src={w.image} alt={w.title} className="h-full w-full object-cover object-center" />
+                    </button>
+                  ))}
+                </div>
 
-                <div className="mx-4 w-full max-w-3xl">
+                <div className="w-full max-w-2xl order-1 lg:order-2">
                   <div
-                    className="group relative rounded-xl overflow-hidden bg-gradient-to-br from-ink/30 to-panel/40 shadow-lg cursor-pointer"
+                    className="group relative rounded-xl overflow-hidden bg-gradient-to-br from-ink/30 to-panel/40 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(63,169,255,0.3)]"
                     onClick={() => setDetailsVisible((v) => !v)}
+                    onMouseEnter={() => setDetailsVisible(true)}
+                    onMouseLeave={() => setDetailsVisible(false)}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => e.key === 'Enter' && setDetailsVisible((v) => !v)}
@@ -461,20 +475,20 @@ export default function App() {
                     <img
                       src={featuredWorks[carouselIndex].image}
                       alt={featuredWorks[carouselIndex].title}
-                      className="h-64 w-full object-cover object-center sm:h-80 md:h-[360px] lg:h-[420px]"
+                      className="h-64 w-full object-cover object-center sm:h-80 md:h-[360px] transition-transform duration-500 group-hover:scale-105"
                     />
 
                     <div
-                      className={`absolute left-4 top-4 rounded-md px-3 py-2 text-sm text-neonSoft backdrop-blur-sm transition-opacity duration-200 ${
-                        detailsVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
+                      className={`absolute left-4 top-4 rounded-md px-3 py-2 text-sm text-neonSoft backdrop-blur-sm transition-opacity duration-300 ${
+                        detailsVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                       }`}
                     >
                       {featuredWorks[carouselIndex].title}
                     </div>
 
                     <div
-                      className={`absolute left-4 bottom-4 right-4 rounded-md bg-gradient-to-t from-black/60 via-ink/40 to-transparent p-4 text-sm text-textmuted transition-opacity duration-200 ${
-                        detailsVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
+                      className={`absolute left-4 bottom-4 right-4 rounded-md bg-gradient-to-t from-black/80 via-ink/50 to-transparent p-4 text-sm text-textmuted transition-all duration-300 ${
+                        detailsVisible ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none translate-y-2'
                       }`}
                     >
                       {featuredWorks[carouselIndex].summary}
@@ -488,37 +502,6 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCarouselIndex((i) => (i + 1) % featuredWorks.length)
-                    setDetailsVisible(false)
-                  }}
-                  className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
-                  aria-label="Next"
-                >
-                  ›
-                </button>
-              </div>
-
-              <div className="mt-4 flex items-center justify-center gap-3">
-                {featuredWorks.map((w, i) => (
-                  <button
-                    key={w.title}
-                    onClick={() => {
-                      setCarouselIndex(i)
-                      setDetailsVisible(true)
-                    }}
-                    className={`h-16 w-28 overflow-hidden rounded-lg border transition-all duration-200 ${
-                      i === carouselIndex ? 'border-neon/40 ring-2 ring-neon/10 scale-105' : 'border-white/8'
-                    }`}
-                    aria-label={`Show ${w.title}`}
-                    type="button"
-                  >
-                    <img src={w.image} alt={w.title} className="h-full w-full object-cover object-center" />
-                  </button>
-                ))}
               </div>
             </div>
           </div>
