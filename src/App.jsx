@@ -67,7 +67,7 @@ const featuredWorks = [
       'A web-based health profiling and forecast risk monitoring platform for BJMP health services, built with a split Laravel backend and React frontend.',
     highlights: ['Centralized profiling', 'Forecast risk monitoring', 'API-driven architecture'],
     stack: ['Laravel', 'React', 'PHP', 'Frontend/Backend Separation'],
-    image: `${basePath}assets/1000079942.png`,
+    image: `${basePath}assets/MedicastSS.png`,
   },
   {
     title: 'DTI Laguna Queue Management System',
@@ -76,7 +76,7 @@ const featuredWorks = [
       'A Windows-based dual-display queue solution for service counters with operator controls, public ticket display, and live queue updates.',
     highlights: ['Dual-display workflow', 'Voice announcements', 'Queue status monitoring'],
     stack: ['Python', 'Eel', 'Windows', 'Local App Workflow'],
-    image: `${basePath}assets/1000079952.png`,
+    image: `${basePath}assets/DTIQueSS.png`,
   },
 ]
 
@@ -178,7 +178,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [animateSkillBars, setAnimateSkillBars] = useState(false)
   const [activePhotoIndex, setActivePhotoIndex] = useState(0)
-  const [featuredIndex, setFeaturedIndex] = useState(0)
+  const [carouselIndex, setCarouselIndex] = useState(0)
   const skillsSectionRef = useRef(null)
 
   useEffect(() => {
@@ -432,78 +432,129 @@ export default function App() {
 
         <section id="featured-work" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Featured Work</h2>
-          <div className="grid gap-8 lg:grid-cols-2 items-start">
-            <div className="relative rounded-[1.5rem] border border-white/6 bg-panel/80 p-4 shadow-neon">
-              <img
-                src={featuredWorks[featuredIndex].image}
-                alt={featuredWorks[featuredIndex].title}
-                className="w-full rounded-[1rem] object-cover max-h-[420px] sm:max-h-[520px]"
-              />
-              <button
-                aria-label="Previous"
-                onClick={() => setFeaturedIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)}
-                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-ink/80 p-2 text-textmain hover:bg-ink/60"
-              >
-                ‹
-              </button>
-              <button
-                aria-label="Next"
-                onClick={() => setFeaturedIndex((i) => (i + 1) % featuredWorks.length)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-ink/80 p-2 text-textmain hover:bg-ink/60"
-              >
-                ›
-              </button>
+          <div className="mb-8">
+            <div className="relative mx-auto max-w-5xl">
+              <div className="group relative overflow-hidden rounded-[1.5rem] border border-white/6 bg-panel/80 p-4 shadow-neon">
+                <div className="flex items-center justify-between gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setCarouselIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)}
+                    className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
+                    aria-label="Previous"
+                  >
+                    ‹
+                  </button>
 
-              <div className="mt-3 flex gap-2 overflow-x-auto">
+                  <div className="mx-4 flex w-full items-center justify-center">
+                    <div className="relative w-full max-w-3xl">
+                      <img
+                        src={featuredWorks[carouselIndex].image}
+                        alt={featuredWorks[carouselIndex].title}
+                        className="h-64 w-full rounded-xl object-cover object-center shadow-lg"
+                      />
+                      <div className="absolute left-6 top-6 rounded-md bg-ink/60 px-3 py-2 text-sm text-neonSoft backdrop-blur">
+                        {featuredWorks[carouselIndex].title}
+                      </div>
+                      <div className="absolute left-6 bottom-6 right-6 rounded-md bg-gradient-to-r from-black/40 via-ink/40 to-transparent p-4 text-sm text-textmuted">
+                        {featuredWorks[carouselIndex].summary}
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {featuredWorks[carouselIndex].stack.map((s) => (
+                            <span key={s} className="rounded-full bg-white/5 px-2 py-1 text-xs text-textmain">
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setCarouselIndex((i) => (i + 1) % featuredWorks.length)}
+                    className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
+                    aria-label="Next"
+                  >
+                    ›
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center justify-center gap-3">
                 {featuredWorks.map((w, i) => (
                   <button
                     key={w.title}
-                    onClick={() => setFeaturedIndex(i)}
-                    className={`flex-shrink-0 rounded-lg border ${
-                      i === featuredIndex ? 'border-neon' : 'border-white/6'
-                    } overflow-hidden`}
+                    onClick={() => setCarouselIndex(i)}
+                    className={`h-16 w-28 overflow-hidden rounded-lg border transition-all duration-200 ${
+                      i === carouselIndex ? 'border-neon/40 ring-2 ring-neon/10' : 'border-white/8'
+                    }`}
+                    aria-label={`Show ${w.title}`}
+                    type="button"
                   >
-                    <img src={w.image} alt={w.title} className="h-20 w-32 object-cover" />
+                    <img src={w.image} alt={w.title} className="h-full w-full object-cover object-center" />
                   </button>
                 ))}
               </div>
             </div>
+          </div>
 
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Featured Project</p>
-              <h3 className="mt-3 text-2xl font-semibold text-textmain">{featuredWorks[featuredIndex].title}</h3>
-              <p className="mt-4 text-sm leading-7 text-textmuted">{featuredWorks[featuredIndex].summary}</p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {featuredWorks[featuredIndex].stack.map((s) => (
-                  <span key={s} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-textmain">
-                    {s}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                {featuredWorks[featuredIndex].highlights.map((h) => (
-                  <div key={h} className="rounded-2xl border border-white/8 bg-ink/55 px-4 py-3 text-sm text-textmain">
-                    {h}
+          <div className="grid gap-6 xl:grid-cols-2">
+            {featuredWorks.map((work, index) => (
+              <article
+                key={work.title}
+                className="group relative overflow-hidden rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.92))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.34)] sm:p-8"
+              >
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(123,200,255,0.16),transparent_38%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative flex items-start justify-between gap-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-neonSoft">0{index + 1}</p>
+                    <h3 className="mt-3 text-2xl font-semibold text-textmain sm:text-3xl">{work.title}</h3>
                   </div>
-                ))}
-              </div>
+                  <span className="rounded-full border border-neon/20 bg-neon/10 px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-neonSoft">
+                    Featured
+                  </span>
+                </div>
 
-              <div className="mt-6 flex gap-3">
-                <a
-                  href={featuredWorks[featuredIndex].href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-full border border-neon bg-neon px-5 py-3 text-sm font-semibold text-ink shadow-neon"
-                >
-                  View Repository
-                </a>
-                <a href="#contact" className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-textmain">
-                  Discuss Similar Work
-                </a>
-              </div>
-            </div>
+                <p className="relative mt-5 max-w-2xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8">
+                  {work.summary}
+                </p>
+
+                <div className="relative mt-6 flex flex-wrap gap-2">
+                  {work.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-textmain"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="relative mt-6 grid gap-3 sm:grid-cols-3">
+                  {work.highlights.map((item) => (
+                    <div key={item} className="rounded-2xl border border-white/8 bg-ink/55 px-4 py-3 text-sm text-textmain">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="relative mt-7 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={work.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-neon bg-neon px-6 py-3 text-sm font-semibold text-ink shadow-neon transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
+                  >
+                    View Repository
+                  </a>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-textmain transition-all duration-300 hover:border-neon/40 hover:bg-neon/10"
+                  >
+                    Discuss Similar Work
+                  </a>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
