@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import MedicastSS from '../assets/MedicastSS.png'
+import DTIQueSS from '../assets/DTIQueSS.png'
 
 const navLinks = [
   { label: 'Home', id: 'home' },
@@ -67,7 +69,7 @@ const featuredWorks = [
       'A web-based health profiling and forecast risk monitoring platform for BJMP health services, built with a split Laravel backend and React frontend.',
     highlights: ['Centralized profiling', 'Forecast risk monitoring', 'API-driven architecture'],
     stack: ['Laravel', 'React', 'PHP', 'Frontend/Backend Separation'],
-    image: `${basePath}assets/MedicastSS.png`,
+    image: MedicastSS,
   },
   {
     title: 'DTI Laguna Queue Management System',
@@ -76,7 +78,7 @@ const featuredWorks = [
       'A Windows-based dual-display queue solution for service counters with operator controls, public ticket display, and live queue updates.',
     highlights: ['Dual-display workflow', 'Voice announcements', 'Queue status monitoring'],
     stack: ['Python', 'Eel', 'Windows', 'Local App Workflow'],
-    image: `${basePath}assets/DTIQueSS.png`,
+    image: DTIQueSS,
   },
 ]
 
@@ -447,22 +449,24 @@ export default function App() {
 
                   <div className="mx-4 flex w-full items-center justify-center">
                     <div className="relative w-full max-w-3xl">
-                      <img
-                        src={featuredWorks[carouselIndex].image}
-                        alt={featuredWorks[carouselIndex].title}
-                        className="h-64 w-full rounded-xl object-cover object-center shadow-lg"
-                      />
-                      <div className="absolute left-6 top-6 rounded-md bg-ink/60 px-3 py-2 text-sm text-neonSoft backdrop-blur">
-                        {featuredWorks[carouselIndex].title}
-                      </div>
-                      <div className="absolute left-6 bottom-6 right-6 rounded-md bg-gradient-to-r from-black/40 via-ink/40 to-transparent p-4 text-sm text-textmuted">
-                        {featuredWorks[carouselIndex].summary}
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {featuredWorks[carouselIndex].stack.map((s) => (
-                            <span key={s} className="rounded-full bg-white/5 px-2 py-1 text-xs text-textmain">
-                              {s}
-                            </span>
-                          ))}
+                      <div className="rounded-xl overflow-hidden bg-gradient-to-br from-ink/30 to-panel/40 shadow-lg">
+                        <img
+                          src={featuredWorks[carouselIndex].image}
+                          alt={featuredWorks[carouselIndex].title}
+                          className="h-64 w-full object-cover object-center sm:h-80 md:h-[360px] lg:h-[420px]"
+                        />
+                        <div className="absolute left-4 top-4 rounded-md bg-ink/60 px-3 py-2 text-sm text-neonSoft backdrop-blur-sm">
+                          {featuredWorks[carouselIndex].title}
+                        </div>
+                        <div className="absolute left-4 bottom-4 right-4 rounded-md bg-gradient-to-t from-black/60 via-ink/40 to-transparent p-4 text-sm text-textmuted">
+                          {featuredWorks[carouselIndex].summary}
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {featuredWorks[carouselIndex].stack.map((s) => (
+                              <span key={s} className="rounded-full bg-white/5 px-2 py-1 text-xs text-textmain">
+                                {s}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -485,7 +489,7 @@ export default function App() {
                     key={w.title}
                     onClick={() => setCarouselIndex(i)}
                     className={`h-16 w-28 overflow-hidden rounded-lg border transition-all duration-200 ${
-                      i === carouselIndex ? 'border-neon/40 ring-2 ring-neon/10' : 'border-white/8'
+                      i === carouselIndex ? 'border-neon/40 ring-2 ring-neon/10 scale-105' : 'border-white/8'
                     }`}
                     aria-label={`Show ${w.title}`}
                     type="button"
