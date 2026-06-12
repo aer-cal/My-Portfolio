@@ -437,7 +437,7 @@ export default function App() {
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
             <div className="relative mx-auto max-w-5xl">
-              <div className="relative flex items-centerjustify-between gap-4">
+              <div className="relative flex items-center justify-between gap-4">
                 <button
                   type="button"
                   onClick={() => {
