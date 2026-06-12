@@ -181,6 +181,7 @@ export default function App() {
   const [animateSkillBars, setAnimateSkillBars] = useState(false)
   const [activePhotoIndex, setActivePhotoIndex] = useState(0)
   const [carouselIndex, setCarouselIndex] = useState(0)
+  const [detailsVisible, setDetailsVisible] = useState(false)
   const skillsSectionRef = useRef(null)
 
   useEffect(() => {
@@ -436,58 +437,79 @@ export default function App() {
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
             <div className="relative mx-auto max-w-5xl">
-              <div className="group relative overflow-hidden rounded-[1.5rem] border border-white/6 bg-panel/80 p-4 shadow-neon">
-                <div className="flex items-center justify-between gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setCarouselIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)}
-                    className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
-                    aria-label="Previous"
-                  >
-                    ‹
-                  </button>
+              <div className="relative flex items-centerjustify-between gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCarouselIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)
+                    setDetailsVisible(false)
+                  }}
+                  className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
+                  aria-label="Previous"
+                >
+                  ‹
+                </button>
 
-                  <div className="mx-4 flex w-full items-center justify-center">
-                    <div className="relative w-full max-w-3xl">
-                      <div className="rounded-xl overflow-hidden bg-gradient-to-br from-ink/30 to-panel/40 shadow-lg">
-                        <img
-                          src={featuredWorks[carouselIndex].image}
-                          alt={featuredWorks[carouselIndex].title}
-                          className="h-64 w-full object-cover object-center sm:h-80 md:h-[360px] lg:h-[420px]"
-                        />
-                        <div className="absolute left-4 top-4 rounded-md bg-ink/60 px-3 py-2 text-sm text-neonSoft backdrop-blur-sm">
-                          {featuredWorks[carouselIndex].title}
-                        </div>
-                        <div className="absolute left-4 bottom-4 right-4 rounded-md bg-gradient-to-t from-black/60 via-ink/40 to-transparent p-4 text-sm text-textmuted">
-                          {featuredWorks[carouselIndex].summary}
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {featuredWorks[carouselIndex].stack.map((s) => (
-                              <span key={s} className="rounded-full bg-white/5 px-2 py-1 text-xs text-textmain">
-                                {s}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
+                <div className="mx-4 w-full max-w-3xl">
+                  <div
+                    className="group relative rounded-xl overflow-hidden bg-gradient-to-br from-ink/30 to-panel/40 shadow-lg cursor-pointer"
+                    onClick={() => setDetailsVisible((v) => !v)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && setDetailsVisible((v) => !v)}
+                  >
+                    <img
+                      src={featuredWorks[carouselIndex].image}
+                      alt={featuredWorks[carouselIndex].title}
+                      className="h-64 w-full object-cover object-center sm:h-80 md:h-[360px] lg:h-[420px]"
+                    />
+
+                    <div
+                      className={`absolute left-4 top-4 rounded-md px-3 py-2 text-sm text-neonSoft backdrop-blur-sm transition-opacity duration-200 ${
+                        detailsVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
+                      }`}
+                    >
+                      {featuredWorks[carouselIndex].title}
+                    </div>
+
+                    <div
+                      className={`absolute left-4 bottom-4 right-4 rounded-md bg-gradient-to-t from-black/60 via-ink/40 to-transparent p-4 text-sm text-textmuted transition-opacity duration-200 ${
+                        detailsVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
+                      }`}
+                    >
+                      {featuredWorks[carouselIndex].summary}
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {featuredWorks[carouselIndex].stack.map((s) => (
+                          <span key={s} className="rounded-full bg-white/5 px-2 py-1 text-xs text-textmain">
+                            {s}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setCarouselIndex((i) => (i + 1) % featuredWorks.length)}
-                    className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
-                    aria-label="Next"
-                  >
-                    ›
-                  </button>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCarouselIndex((i) => (i + 1) % featuredWorks.length)
+                    setDetailsVisible(false)
+                  }}
+                  className="rounded-full border border-white/6 bg-ink/60 p-2 text-textmuted hover:bg-white/3"
+                  aria-label="Next"
+                >
+                  ›
+                </button>
               </div>
 
               <div className="mt-4 flex items-center justify-center gap-3">
                 {featuredWorks.map((w, i) => (
                   <button
                     key={w.title}
-                    onClick={() => setCarouselIndex(i)}
+                    onClick={() => {
+                      setCarouselIndex(i)
+                      setDetailsVisible(true)
+                    }}
                     className={`h-16 w-28 overflow-hidden rounded-lg border transition-all duration-200 ${
                       i === carouselIndex ? 'border-neon/40 ring-2 ring-neon/10 scale-105' : 'border-white/8'
                     }`}
@@ -500,8 +522,6 @@ export default function App() {
               </div>
             </div>
           </div>
-
-          {/* Detailed featured cards removed — carousel only */}
         </section>
 
         <section id="badges" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
