@@ -437,70 +437,100 @@ export default function App() {
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
             <div className="relative mx-auto">
-              <div className="relative flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6">
-                <div className="w-full lg:w-auto flex flex-col gap-3 lg:gap-4 order-2 lg:order-1">
-                  {featuredWorks.map((w, i) => (
-                    <button
-                      key={w.title}
-                      onClick={() => {
-                        setCarouselIndex(i)
-                        setDetailsVisible(true)
-                      }}
-                      onMouseEnter={() => {
-                        setCarouselIndex(i)
-                        setDetailsVisible(true)
-                      }}
-                      onMouseLeave={() => setDetailsVisible(false)}
-                      className={`h-20 w-32 lg:h-24 lg:w-36 overflow-hidden rounded-lg border transition-all duration-300 transform hover:scale-110 hover:shadow-lg ${
-                        i === carouselIndex ? 'border-neon/60 ring-2 ring-neon/20 scale-110 shadow-neon' : 'border-white/8 hover:border-neon/40'
-                      }`}
-                      aria-label={`Show ${w.title}`}
-                      type="button"
-                    >
-                      <img src={w.image} alt={w.title} className="h-full w-full object-cover object-center" />
-                    </button>
-                  ))}
-                </div>
-
-                <div className="w-full max-w-2xl order-1 lg:order-2">
+              <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-6 lg:gap-8 items-start">
+                {/* Left: Image + Thumbnails */}
+                <div className="flex flex-col gap-4">
                   <div
                     className="group relative rounded-xl overflow-hidden bg-gradient-to-br from-ink/30 to-panel/40 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(63,169,255,0.3)]"
-                    onClick={() => setDetailsVisible((v) => !v)}
                     onMouseEnter={() => setDetailsVisible(true)}
                     onMouseLeave={() => setDetailsVisible(false)}
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && setDetailsVisible((v) => !v)}
                   >
                     <img
                       src={featuredWorks[carouselIndex].image}
                       alt={featuredWorks[carouselIndex].title}
-                      className="h-64 w-full object-cover object-center sm:h-80 md:h-[360px] transition-transform duration-500 group-hover:scale-105"
+                      className="h-80 w-full object-cover object-center sm:h-96 md:h-[420px] transition-transform duration-500 group-hover:scale-105"
                     />
+                  </div>
 
-                    <div
-                      className={`absolute left-4 top-4 rounded-md px-3 py-2 text-sm text-neonSoft backdrop-blur-sm transition-opacity duration-300 ${
-                        detailsVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                      }`}
-                    >
-                      {featuredWorks[carouselIndex].title}
+                  {/* Vertical Thumbnails */}
+                  <div className="flex flex-col gap-3 md:flex-row lg:flex-col">
+                    {featuredWorks.map((w, i) => (
+                      <button
+                        key={w.title}
+                        onClick={() => setCarouselIndex(i)}
+                        onMouseEnter={() => setCarouselIndex(i)}
+                        className={`h-20 w-full md:h-16 md:w-32 lg:h-20 lg:w-full overflow-hidden rounded-lg border transition-all duration-300 transform hover:scale-105 ${
+                          i === carouselIndex ? 'border-neon/60 ring-2 ring-neon/20 scale-105 shadow-neon' : 'border-white/8 hover:border-neon/40'
+                        }`}
+                        aria-label={`Show ${w.title}`}
+                        type="button"
+                      >
+                        <img src={w.image} alt={w.title} className="h-full w-full object-cover object-center" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: Details Card */}
+                <div
+                  className="rounded-[1.75rem] border border-neon/20 bg-[linear-gradient(135deg,rgba(63,169,255,0.08),rgba(13,19,32,0.85))] p-6 sm:p-8 shadow-neon transition-all duration-300 hover:border-neon/40"
+                  onMouseEnter={() => setDetailsVisible(true)}
+                  onMouseLeave={() => setDetailsVisible(false)}
+                >
+                  {/* Title */}
+                  <div className="mb-6">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-neon/25 bg-neon/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-neonSoft mb-3">
+                      <span className="h-2 w-2 rounded-full bg-neon shadow-neon" />
+                      Featured Project
                     </div>
+                    <h3 className="text-3xl sm:text-4xl font-semibold text-textmain">
+                      {featuredWorks[carouselIndex].title}
+                    </h3>
+                  </div>
 
-                    <div
-                      className={`absolute left-4 bottom-4 right-4 rounded-md bg-gradient-to-t from-black/80 via-ink/50 to-transparent p-4 text-sm text-textmuted transition-all duration-300 ${
-                        detailsVisible ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none translate-y-2'
-                      }`}
-                    >
-                      {featuredWorks[carouselIndex].summary}
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {featuredWorks[carouselIndex].stack.map((s) => (
-                          <span key={s} className="rounded-full bg-white/5 px-2 py-1 text-xs text-textmain">
-                            {s}
-                          </span>
-                        ))}
-                      </div>
+                  {/* Summary */}
+                  <p className="text-base leading-7 text-textmuted mb-6">
+                    {featuredWorks[carouselIndex].summary}
+                  </p>
+
+                  {/* Highlights */}
+                  <div className="mb-6">
+                    <p className="text-xs uppercase tracking-[0.16em] text-neonSoft mb-3 font-semibold">Key Features</p>
+                    <div className="flex flex-wrap gap-2">
+                      {featuredWorks[carouselIndex].highlights.map((h) => (
+                        <span key={h} className="rounded-full bg-neon/15 border border-neon/25 px-3 py-1.5 text-xs text-textmain">
+                          {h}
+                        </span>
+                      ))}
                     </div>
                   </div>
+
+                  {/* Tech Stack */}
+                  <div className="mb-8">
+                    <p className="text-xs uppercase tracking-[0.16em] text-neonSoft mb-3 font-semibold">Technology Stack</p>
+                    <div className="flex flex-wrap gap-2">
+                      {featuredWorks[carouselIndex].stack.map((s) => (
+                        <span key={s} className="rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs text-textmain hover:border-neon/30 hover:bg-neon/10 transition-all duration-200">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Button */}
+                  <a
+                    href={featuredWorks[carouselIndex].href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-neon bg-neon/10 px-6 py-3 text-sm font-semibold text-neon transition-all duration-300 hover:bg-neon/20 hover:shadow-neon group"
+                  >
+                    View Repository
+                    <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
