@@ -1,25 +1,38 @@
 import { useEffect, useRef, useState } from 'react'
 
-const navLinks = ['Home', 'About', 'Skills', 'Badges', 'Contact']
+const navLinks = [
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
+  { label: 'Skills', id: 'skills' },
+  { label: 'Featured Work', id: 'featured-work' },
+  { label: 'Badges', id: 'badges' },
+  { label: 'Contact', id: 'contact' },
+]
 
 const skillCards = [
   {
     title: 'Cybersecurity & Risk Monitoring',
     description: 'Implementing threat mitigation protocols and heuristic evaluation for secure environments.',
-    levelLabel: 'Beginner',
-    levelValue: 35,
+    levelLabel: 'Portfolio Signal',
+    baseValue: 30,
+    badgeWeight: 5,
+    workWeight: 2,
   },
   {
     title: 'System Administration',
     description: 'Server maintenance, Linux / OS management, and technical hardware / software troubleshooting.',
-    levelLabel: 'Beginner',
-    levelValue: 40,
+    levelLabel: 'Portfolio Signal',
+    baseValue: 34,
+    badgeWeight: 4,
+    workWeight: 3,
   },
   {
     title: 'Technical Development',
     description: 'Building efficient tools using Python, Eel frameworks, and managing complex integrations.',
-    levelLabel: 'Beginner',
-    levelValue: 38,
+    levelLabel: 'Portfolio Signal',
+    baseValue: 32,
+    badgeWeight: 3,
+    workWeight: 5,
   },
 ]
 
@@ -45,6 +58,27 @@ const badges = [
     href: 'https://www.credly.com/badges/d3c48501-d376-4259-9355-13dd8ed93b48/public_url',
   },
 ]
+
+const featuredWorks = [
+  {
+    title: 'Medicast BJMP',
+    href: 'https://github.com/aer-cal/Medicast-BJMP-Web-based-Health-Profiling-and-Forecast-Risk-Monitoring-System',
+    summary:
+      'A web-based health profiling and forecast risk monitoring platform for BJMP health services, built with a split Laravel backend and React frontend.',
+    highlights: ['Centralized profiling', 'Forecast risk monitoring', 'API-driven architecture'],
+    stack: ['Laravel', 'React', 'PHP', 'Frontend/Backend Separation'],
+  },
+  {
+    title: 'DTI Laguna Queue Management System',
+    href: 'https://github.com/aer-cal/DTI-Laguna-Business-Name-Queuing-System',
+    summary:
+      'A Windows-based dual-display queue solution for service counters with operator controls, public ticket display, and live queue updates.',
+    highlights: ['Dual-display workflow', 'Voice announcements', 'Queue status monitoring'],
+    stack: ['Python', 'Eel', 'Windows', 'Local App Workflow'],
+  },
+]
+
+const portfolioSignalCount = badges.length + featuredWorks.length
 
 const socialLinks = [
   {
@@ -228,9 +262,9 @@ export default function App() {
           <nav className="w-full overflow-x-auto pb-1 sm:w-auto sm:overflow-visible sm:pb-0">
             <ul className="flex min-w-max flex-nowrap gap-2 text-[0.62rem] uppercase tracking-[0.14em] text-textmuted sm:min-w-0 sm:flex-wrap sm:justify-end sm:gap-4 sm:text-xs sm:tracking-[0.2em]">
               {navLinks.map((link) => {
-                const target = link.toLowerCase()
+                const target = link.id
                 return (
-                  <li key={link}>
+                  <li key={link.id}>
                     <a
                       className={`rounded-full border px-2.5 py-1.5 transition-all duration-300 sm:px-3 sm:py-2 ${
                         activeSection === target
@@ -240,7 +274,7 @@ export default function App() {
                       href={`#${target}`}
                       onClick={() => setActiveSection(target)}
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 )
@@ -346,6 +380,10 @@ export default function App() {
           className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12"
         >
           <h2 className={sectionTitleClass}>Core Capabilities</h2>
+          <p className="mb-8 max-w-3xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8">
+            These progress bars are tied to your portfolio proof. When you add more badges or featured work,
+            the values increase automatically so the section stays in sync with your real output.
+          </p>
           <div className="grid gap-5 md:grid-cols-3">
             {skillCards.map((card, index) => (
               <article
@@ -362,17 +400,114 @@ export default function App() {
                 <div className="mt-6">
                   <div className="mb-2 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-textmuted">
                     <span>{card.levelLabel}</span>
-                    <span>{card.levelValue}%</span>
+                    <span>
+                      {Math.min(
+                        95,
+                        card.baseValue + badges.length * card.badgeWeight + featuredWorks.length * card.workWeight,
+                      )}%
+                    </span>
                   </div>
                   <div className="h-2.5 w-full overflow-hidden rounded-full bg-ink/80">
                     <div
                       className="h-full rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.5),rgba(123,200,255,0.95))] shadow-neon transition-all duration-1000 ease-out group-hover:brightness-110"
                       style={{
-                        width: animateSkillBars ? `${card.levelValue}%` : '0%',
+                        width: animateSkillBars
+                          ? `${Math.min(
+                              95,
+                              card.baseValue + badges.length * card.badgeWeight + featuredWorks.length * card.workWeight,
+                            )}%`
+                          : '0%',
                         transitionDelay: `${index * 180}ms`,
                       }}
                     />
                   </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="featured-work" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
+          <h2 className={sectionTitleClass}>Featured Work</h2>
+          <div className="mb-8 grid gap-4 sm:grid-cols-3">
+            <div className="rounded-2xl border border-white/5 bg-panel/75 p-5 backdrop-blur-sm">
+              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Showcase focus</p>
+              <p className="mt-3 text-2xl font-semibold text-textmain">{featuredWorks.length} featured builds</p>
+              <p className="mt-2 text-sm leading-7 text-textmuted">
+                Curated to highlight problem solving, UI polish, and practical delivery.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/5 bg-panel/75 p-5 backdrop-blur-sm">
+              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Portfolio proof</p>
+              <p className="mt-3 text-2xl font-semibold text-textmain">{badges.length} badges</p>
+              <p className="mt-2 text-sm leading-7 text-textmuted">
+                Certifications and badges strengthen the credibility of every project you show.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/5 bg-panel/75 p-5 backdrop-blur-sm">
+              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Growth signal</p>
+              <p className="mt-3 text-2xl font-semibold text-textmain">{portfolioSignalCount} total signals</p>
+              <p className="mt-2 text-sm leading-7 text-textmuted">
+                Add a new work or badge and the skill bars automatically rise with it.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-2">
+            {featuredWorks.map((work, index) => (
+              <article
+                key={work.title}
+                className="group relative overflow-hidden rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.92))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.34)] sm:p-8"
+              >
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(123,200,255,0.16),transparent_38%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative flex items-start justify-between gap-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-neonSoft">0{index + 1}</p>
+                    <h3 className="mt-3 text-2xl font-semibold text-textmain sm:text-3xl">{work.title}</h3>
+                  </div>
+                  <span className="rounded-full border border-neon/20 bg-neon/10 px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-neonSoft">
+                    Featured
+                  </span>
+                </div>
+
+                <p className="relative mt-5 max-w-2xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8">
+                  {work.summary}
+                </p>
+
+                <div className="relative mt-6 flex flex-wrap gap-2">
+                  {work.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-textmain"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="relative mt-6 grid gap-3 sm:grid-cols-3">
+                  {work.highlights.map((item) => (
+                    <div key={item} className="rounded-2xl border border-white/8 bg-ink/55 px-4 py-3 text-sm text-textmain">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="relative mt-7 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={work.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-neon bg-neon px-6 py-3 text-sm font-semibold text-ink shadow-neon transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
+                  >
+                    View Repository
+                  </a>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-textmain transition-all duration-300 hover:border-neon/40 hover:bg-neon/10"
+                  >
+                    Discuss Similar Work
+                  </a>
                 </div>
               </article>
             ))}
