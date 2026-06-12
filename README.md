@@ -79,7 +79,7 @@ Aaron Portfolio/
 │   └── script.js       # JavaScript functionality
 ├── assets/
 │   ├── 1000075972.jpg  # Profile images
-│   ├── 1000075973.jpg
+│   ├── 1000079942.png
 │   └── result_0.jpeg
 ├── .gitignore          # Git ignore file
 └── README.md           # This file
@@ -144,7 +144,7 @@ if (text === 'instagram') {
 
 Replace image paths in `index.html`:
 - `assets/1000075972.jpg` - Main profile image
-- `assets/1000075973.jpg` - Contact section image
+- `assets/1000079942.png` - Contact section image
 - `assets/result_0.jpeg` - About section image
 
 ### Update Content

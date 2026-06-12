@@ -35,7 +35,7 @@ Currently set to placeholder URLs. Replace with yours:
 ### 4. Add Images (Already Done!)
 Your images are in `assets/` folder:
 - 1000075972.jpg - Profile (used in Home & Nav)
-- 1000075973.jpg - Contact section
+- 1000079942.png - Contact section
 - result_0.jpeg - About section
 
 ---
