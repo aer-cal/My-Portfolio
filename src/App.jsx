@@ -67,6 +67,7 @@ const featuredWorks = [
       'A web-based health profiling and forecast risk monitoring platform for BJMP health services, built with a split Laravel backend and React frontend.',
     highlights: ['Centralized profiling', 'Forecast risk monitoring', 'API-driven architecture'],
     stack: ['Laravel', 'React', 'PHP', 'Frontend/Backend Separation'],
+    image: `${basePath}assets/1000079942.png`,
   },
   {
     title: 'DTI Laguna Queue Management System',
@@ -75,6 +76,7 @@ const featuredWorks = [
       'A Windows-based dual-display queue solution for service counters with operator controls, public ticket display, and live queue updates.',
     highlights: ['Dual-display workflow', 'Voice announcements', 'Queue status monitoring'],
     stack: ['Python', 'Eel', 'Windows', 'Local App Workflow'],
+    image: `${basePath}assets/1000079952.png`,
   },
 ]
 
@@ -176,6 +178,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [animateSkillBars, setAnimateSkillBars] = useState(false)
   const [activePhotoIndex, setActivePhotoIndex] = useState(0)
+  const [featuredIndex, setFeaturedIndex] = useState(0)
   const skillsSectionRef = useRef(null)
 
   useEffect(() => {
@@ -429,88 +432,78 @@ export default function App() {
 
         <section id="featured-work" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Featured Work</h2>
-          <div className="mb-8 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-white/5 bg-panel/75 p-5 backdrop-blur-sm">
-              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Showcase focus</p>
-              <p className="mt-3 text-2xl font-semibold text-textmain">{featuredWorks.length} featured builds</p>
-              <p className="mt-2 text-sm leading-7 text-textmuted">
-                Curated to highlight problem solving, UI polish, and practical delivery.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-white/5 bg-panel/75 p-5 backdrop-blur-sm">
-              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Portfolio proof</p>
-              <p className="mt-3 text-2xl font-semibold text-textmain">{badges.length} badges</p>
-              <p className="mt-2 text-sm leading-7 text-textmuted">
-                Certifications and badges strengthen the credibility of every project you show.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-white/5 bg-panel/75 p-5 backdrop-blur-sm">
-              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Growth signal</p>
-              <p className="mt-3 text-2xl font-semibold text-textmain">{portfolioSignalCount} total signals</p>
-              <p className="mt-2 text-sm leading-7 text-textmuted">
-                Add a new work or badge and the skill bars automatically rise with it.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid gap-6 xl:grid-cols-2">
-            {featuredWorks.map((work, index) => (
-              <article
-                key={work.title}
-                className="group relative overflow-hidden rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.92))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.34)] sm:p-8"
+          <div className="grid gap-8 lg:grid-cols-2 items-start">
+            <div className="relative rounded-[1.5rem] border border-white/6 bg-panel/80 p-4 shadow-neon">
+              <img
+                src={featuredWorks[featuredIndex].image}
+                alt={featuredWorks[featuredIndex].title}
+                className="w-full rounded-[1rem] object-cover max-h-[420px] sm:max-h-[520px]"
+              />
+              <button
+                aria-label="Previous"
+                onClick={() => setFeaturedIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)}
+                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-ink/80 p-2 text-textmain hover:bg-ink/60"
               >
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(123,200,255,0.16),transparent_38%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative flex items-start justify-between gap-6">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.24em] text-neonSoft">0{index + 1}</p>
-                    <h3 className="mt-3 text-2xl font-semibold text-textmain sm:text-3xl">{work.title}</h3>
-                  </div>
-                  <span className="rounded-full border border-neon/20 bg-neon/10 px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-neonSoft">
-                    Featured
+                ‹
+              </button>
+              <button
+                aria-label="Next"
+                onClick={() => setFeaturedIndex((i) => (i + 1) % featuredWorks.length)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-ink/80 p-2 text-textmain hover:bg-ink/60"
+              >
+                ›
+              </button>
+
+              <div className="mt-3 flex gap-2 overflow-x-auto">
+                {featuredWorks.map((w, i) => (
+                  <button
+                    key={w.title}
+                    onClick={() => setFeaturedIndex(i)}
+                    className={`flex-shrink-0 rounded-lg border ${
+                      i === featuredIndex ? 'border-neon' : 'border-white/6'
+                    } overflow-hidden`}
+                  >
+                    <img src={w.image} alt={w.title} className="h-20 w-32 object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-neonSoft">Featured Project</p>
+              <h3 className="mt-3 text-2xl font-semibold text-textmain">{featuredWorks[featuredIndex].title}</h3>
+              <p className="mt-4 text-sm leading-7 text-textmuted">{featuredWorks[featuredIndex].summary}</p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {featuredWorks[featuredIndex].stack.map((s) => (
+                  <span key={s} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-textmain">
+                    {s}
                   </span>
-                </div>
+                ))}
+              </div>
 
-                <p className="relative mt-5 max-w-2xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8">
-                  {work.summary}
-                </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {featuredWorks[featuredIndex].highlights.map((h) => (
+                  <div key={h} className="rounded-2xl border border-white/8 bg-ink/55 px-4 py-3 text-sm text-textmain">
+                    {h}
+                  </div>
+                ))}
+              </div>
 
-                <div className="relative mt-6 flex flex-wrap gap-2">
-                  {work.stack.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-textmain"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="relative mt-6 grid gap-3 sm:grid-cols-3">
-                  {work.highlights.map((item) => (
-                    <div key={item} className="rounded-2xl border border-white/8 bg-ink/55 px-4 py-3 text-sm text-textmain">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="relative mt-7 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={work.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-neon bg-neon px-6 py-3 text-sm font-semibold text-ink shadow-neon transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
-                  >
-                    View Repository
-                  </a>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-textmain transition-all duration-300 hover:border-neon/40 hover:bg-neon/10"
-                  >
-                    Discuss Similar Work
-                  </a>
-                </div>
-              </article>
-            ))}
+              <div className="mt-6 flex gap-3">
+                <a
+                  href={featuredWorks[featuredIndex].href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-full border border-neon bg-neon px-5 py-3 text-sm font-semibold text-ink shadow-neon"
+                >
+                  View Repository
+                </a>
+                <a href="#contact" className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-textmain">
+                  Discuss Similar Work
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -581,27 +574,41 @@ export default function App() {
                 If you are looking for serious opportunities and need a project that feels focused, modern, and technically credible, I'd love to help. Let's collaborate to bring the same precision, depth, and professional finish you see here to your next venture. Reach out below to get started.
               </p>
 
-              <form className="mt-8 grid gap-4">
+              <form
+                className="mt-8 grid gap-4"
+                action="https://formsubmit.co/aaroncalupitan2@gmail.com"
+                method="POST"
+              >
+                <input type="hidden" name="_subject" value="New portfolio contact submission" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="https://aer-cal.github.io/My-Portfolio/" />
                 <input
                   type="text"
+                  name="name"
                   placeholder="Name"
+                  required
                   className="w-full rounded-2xl border border-white/8 bg-ink/70 px-4 py-3.5 text-sm text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon sm:px-5 sm:py-4 sm:text-base"
                 />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Email"
+                  required
                   className="w-full rounded-2xl border border-white/8 bg-ink/70 px-4 py-3.5 text-sm text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon sm:px-5 sm:py-4 sm:text-base"
                 />
                 <textarea
                   rows="4"
+                  name="message"
                   placeholder="Message"
+                  required
                   className="w-full rounded-2xl border border-white/8 bg-ink/70 px-4 py-3.5 text-sm text-textmain outline-none transition-all duration-300 hover:border-neon/40 focus:border-neon/50 focus:shadow-neon sm:px-5 sm:py-4 sm:text-base"
                 />
                 <button
-                  type="button"
+                  type="submit"
                   className="mt-2 inline-flex w-full items-center justify-center rounded-full border border-neon bg-neon px-7 py-3 font-semibold text-ink shadow-neon transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
                 >
-                  Submit Protocol
+                  Send to Email
                 </button>
               </form>
             </div>
