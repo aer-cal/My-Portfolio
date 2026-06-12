@@ -501,65 +501,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid gap-6 xl:grid-cols-2">
-            {featuredWorks.map((work, index) => (
-              <article
-                key={work.title}
-                className="group relative overflow-hidden rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.92))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.34)] sm:p-8"
-              >
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(123,200,255,0.16),transparent_38%)] opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative flex items-start justify-between gap-6">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.24em] text-neonSoft">0{index + 1}</p>
-                    <h3 className="mt-3 text-2xl font-semibold text-textmain sm:text-3xl">{work.title}</h3>
-                  </div>
-                  <span className="rounded-full border border-neon/20 bg-neon/10 px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-neonSoft">
-                    Featured
-                  </span>
-                </div>
-
-                <p className="relative mt-5 max-w-2xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8">
-                  {work.summary}
-                </p>
-
-                <div className="relative mt-6 flex flex-wrap gap-2">
-                  {work.stack.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-textmain"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="relative mt-6 grid gap-3 sm:grid-cols-3">
-                  {work.highlights.map((item) => (
-                    <div key={item} className="rounded-2xl border border-white/8 bg-ink/55 px-4 py-3 text-sm text-textmain">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="relative mt-7 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href={work.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-neon bg-neon px-6 py-3 text-sm font-semibold text-ink shadow-neon transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
-                  >
-                    View Repository
-                  </a>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-textmain transition-all duration-300 hover:border-neon/40 hover:bg-neon/10"
-                  >
-                    Discuss Similar Work
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
+          {/* Detailed featured cards removed — carousel only */}
         </section>
 
         <section id="badges" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
