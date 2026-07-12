@@ -181,7 +181,6 @@ export default function App() {
   const [animateSkillBars, setAnimateSkillBars] = useState(false)
   const [activePhotoIndex, setActivePhotoIndex] = useState(0)
   const [carouselIndex, setCarouselIndex] = useState(0)
-  const [detailsVisible, setDetailsVisible] = useState(false)
   const skillsSectionRef = useRef(null)
 
   useEffect(() => {
@@ -436,102 +435,108 @@ export default function App() {
         <section id="featured-work" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
-            <div className="relative mx-auto">
-              <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-6 lg:gap-8 items-start">
-                {/* Left: Image + Thumbnails */}
-                <div className="flex flex-col gap-4">
-                  <div
-                    className="group relative rounded-xl overflow-hidden bg-gradient-to-br from-ink/30 to-panel/40 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(63,169,255,0.3)]"
-                    onMouseEnter={() => setDetailsVisible(true)}
-                    onMouseLeave={() => setDetailsVisible(false)}
-                    role="button"
-                    tabIndex={0}
-                  >
-                    <img
-                      src={featuredWorks[carouselIndex].image}
-                      alt={featuredWorks[carouselIndex].title}
-                      className="h-80 w-full object-cover object-center sm:h-96 md:h-[420px] transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
+            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] border border-white/6 bg-panel/80 p-4 shadow-neon sm:p-6">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
 
-                  {/* Vertical Thumbnails */}
-                  <div className="flex flex-col gap-3 md:flex-row lg:flex-col">
-                    {featuredWorks.map((w, i) => (
-                      <button
-                        key={w.title}
-                        onClick={() => setCarouselIndex(i)}
-                        onMouseEnter={() => setCarouselIndex(i)}
-                        className={`h-20 w-full md:h-16 md:w-32 lg:h-20 lg:w-full overflow-hidden rounded-lg border transition-all duration-300 transform hover:scale-105 ${
-                          i === carouselIndex ? 'border-neon/60 ring-2 ring-neon/20 scale-105 shadow-neon' : 'border-white/8 hover:border-neon/40'
-                        }`}
-                        aria-label={`Show ${w.title}`}
-                        type="button"
-                      >
-                        <img src={w.image} alt={w.title} className="h-full w-full object-cover object-center" />
-                      </button>
+              <div className="relative flex items-center gap-4 sm:gap-5">
+                <button
+                  type="button"
+                  onClick={() => setCarouselIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)}
+                  className="z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/8 bg-ink/75 text-xl text-textmain backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:text-neonSoft"
+                  aria-label="Previous slide"
+                >
+                  ‹
+                </button>
+
+                <div className="relative min-w-0 flex-1 overflow-hidden rounded-[1.25rem] border border-white/6 bg-ink/60">
+                  <div
+                    className="flex transition-transform duration-700 ease-in-out"
+                    style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+                  >
+                    {featuredWorks.map((work) => (
+                      <article key={work.title} className="w-full shrink-0">
+                        <div className="grid gap-0 lg:grid-cols-[1.25fr_0.95fr]">
+                          <div className="relative min-h-[260px] bg-[#07111f] sm:min-h-[360px] lg:min-h-[460px]">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(123,200,255,0.16),transparent_58%)]" />
+                            <img
+                              src={work.image}
+                              alt={work.title}
+                              className="absolute inset-0 h-full w-full object-contain p-4 sm:p-6 lg:p-8"
+                            />
+                          </div>
+
+                          <div className="flex flex-col justify-between gap-6 border-t border-white/6 bg-[linear-gradient(180deg,rgba(10,16,28,0.98),rgba(10,16,28,0.86))] p-5 sm:p-7 lg:border-l lg:border-t-0 lg:p-8">
+                            <div>
+                              <div className="mb-3 inline-flex rounded-full border border-neon/20 bg-neon/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-neonSoft">
+                                Featured Project
+                              </div>
+                              <h3 className="text-2xl font-semibold text-textmain sm:text-3xl">{work.title}</h3>
+                              <p className="mt-4 max-w-xl text-sm leading-7 text-textmuted sm:text-base sm:leading-8">
+                                {work.summary}
+                              </p>
+                            </div>
+
+                            <div className="space-y-4">
+                              <div className="flex flex-wrap gap-2">
+                                {work.stack.map((stackItem) => (
+                                  <span
+                                    key={stackItem}
+                                    className="rounded-full border border-white/8 bg-white/5 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-textmain"
+                                  >
+                                    {stackItem}
+                                  </span>
+                                ))}
+                              </div>
+
+                              <div className="flex flex-wrap gap-3">
+                                {work.highlights.map((highlight) => (
+                                  <span
+                                    key={highlight}
+                                    className="rounded-full border border-neon/15 bg-neon/8 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-neonSoft"
+                                  >
+                                    {highlight}
+                                  </span>
+                                ))}
+                              </div>
+
+                              <a
+                                href={work.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex w-fit items-center justify-center rounded-full border border-neon bg-neon px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
+                              >
+                                View Repository
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
                     ))}
                   </div>
                 </div>
 
-                {/* Right: Details Card */}
-                <div
-                  className="rounded-[1.75rem] border border-neon/20 bg-[linear-gradient(135deg,rgba(63,169,255,0.08),rgba(13,19,32,0.85))] p-6 sm:p-8 shadow-neon transition-all duration-300 hover:border-neon/40"
-                  onMouseEnter={() => setDetailsVisible(true)}
-                  onMouseLeave={() => setDetailsVisible(false)}
+                <button
+                  type="button"
+                  onClick={() => setCarouselIndex((i) => (i + 1) % featuredWorks.length)}
+                  className="z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/8 bg-ink/75 text-xl text-textmain backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:text-neonSoft"
+                  aria-label="Next slide"
                 >
-                  {/* Title */}
-                  <div className="mb-6">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-neon/25 bg-neon/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-neonSoft mb-3">
-                      <span className="h-2 w-2 rounded-full bg-neon shadow-neon" />
-                      Featured Project
-                    </div>
-                    <h3 className="text-3xl sm:text-4xl font-semibold text-textmain">
-                      {featuredWorks[carouselIndex].title}
-                    </h3>
-                  </div>
+                  ›
+                </button>
+              </div>
 
-                  {/* Summary */}
-                  <p className="text-base leading-7 text-textmuted mb-6">
-                    {featuredWorks[carouselIndex].summary}
-                  </p>
-
-                  {/* Highlights */}
-                  <div className="mb-6">
-                    <p className="text-xs uppercase tracking-[0.16em] text-neonSoft mb-3 font-semibold">Key Features</p>
-                    <div className="flex flex-wrap gap-2">
-                      {featuredWorks[carouselIndex].highlights.map((h) => (
-                        <span key={h} className="rounded-full bg-neon/15 border border-neon/25 px-3 py-1.5 text-xs text-textmain">
-                          {h}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div className="mb-8">
-                    <p className="text-xs uppercase tracking-[0.16em] text-neonSoft mb-3 font-semibold">Technology Stack</p>
-                    <div className="flex flex-wrap gap-2">
-                      {featuredWorks[carouselIndex].stack.map((s) => (
-                        <span key={s} className="rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs text-textmain hover:border-neon/30 hover:bg-neon/10 transition-all duration-200">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Action Button */}
-                  <a
-                    href={featuredWorks[carouselIndex].href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-neon bg-neon/10 px-6 py-3 text-sm font-semibold text-neon transition-all duration-300 hover:bg-neon/20 hover:shadow-neon group"
-                  >
-                    View Repository
-                    <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </a>
-                </div>
+              <div className="relative mt-5 flex items-center justify-center gap-3">
+                {featuredWorks.map((work, index) => (
+                  <button
+                    key={work.title}
+                    type="button"
+                    onClick={() => setCarouselIndex(index)}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      index === carouselIndex ? 'w-10 bg-neon shadow-neon' : 'w-2.5 bg-white/25 hover:bg-white/45'
+                    }`}
+                    aria-label={`Show ${work.title}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
