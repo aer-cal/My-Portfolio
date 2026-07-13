@@ -188,6 +188,47 @@ export default function App() {
   const sliderValueLabel = String(carouselIndex + 1).padStart(2, '0')
   const sliderTotalLabel = String(featuredWorks.length).padStart(2, '0')
 
+  const moveSlider = (direction) => {
+    setCarouselIndex((current) => {
+      if (sliderMax === 0) {
+        return 0
+      }
+
+      const nextValue = current + direction
+      if (nextValue < 0) {
+        return sliderMax
+      }
+
+      if (nextValue > sliderMax) {
+        return 0
+      }
+
+      return nextValue
+    })
+  }
+
+  const handleSliderKeyDown = (event) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault()
+      moveSlider(-1)
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault()
+      moveSlider(1)
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault()
+      setCarouselIndex(0)
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault()
+      setCarouselIndex(sliderMax)
+    }
+  }
+
   useEffect(() => {
     const section = skillsSectionRef.current
     if (!section) {
@@ -440,13 +481,13 @@ export default function App() {
         <section id="featured-work" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
-            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] border border-white/6 bg-panel/80 p-4 shadow-neon sm:p-6">
+            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] bg-panel/80 p-4 shadow-neon sm:p-6">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
 
               <div className="relative">
-                <div className="relative min-w-0 flex-1 overflow-hidden rounded-[1.25rem] border border-white/6 bg-ink/60">
+                <div className="relative min-w-0 flex-1 overflow-hidden rounded-[1.25rem] bg-ink/60">
                   <div
-                    className="flex transition-transform duration-700 ease-in-out"
+                    className={`flex transition-transform duration-700 ease-in-out ${sliderDragging ? 'scale-[1.01]' : 'scale-100'}`}
                     style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
                   >
                     {featuredWorks.map((work) => (
@@ -457,13 +498,15 @@ export default function App() {
                             <img
                               src={work.image}
                               alt={work.title}
-                              className="absolute inset-0 h-full w-full object-contain object-center p-4 sm:p-6 lg:p-8"
+                              className={`absolute inset-0 h-full w-full object-contain object-center p-4 transition-all duration-300 sm:p-6 lg:p-8 ${
+                                sliderDragging ? 'scale-[0.985]' : 'scale-100'
+                              }`}
                             />
                           </div>
 
-                          <div className="flex flex-col justify-between gap-6 border-t border-white/6 bg-[linear-gradient(180deg,rgba(10,16,28,0.98),rgba(10,16,28,0.86))] p-5 sm:p-7 lg:border-l lg:border-t-0 lg:p-8">
+                          <div className="flex flex-col justify-between gap-6 bg-[linear-gradient(180deg,rgba(10,16,28,0.98),rgba(10,16,28,0.86))] p-5 sm:p-7 lg:p-8">
                             <div>
-                              <div className="mb-3 inline-flex rounded-full border border-neon/20 bg-neon/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-neonSoft">
+                              <div className="mb-3 inline-flex rounded-full bg-neon/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-neonSoft">
                                 Featured Project
                               </div>
                               <h3 className="text-2xl font-semibold text-textmain sm:text-3xl">{work.title}</h3>
@@ -511,7 +554,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="mt-5 rounded-[1.35rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,19,32,0.92),rgba(8,12,20,0.94))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-5">
+                <div className="mt-5 rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(13,19,32,0.92),rgba(8,12,20,0.94))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-5">
                   <div className="mb-4 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.22em] text-textmuted sm:text-sm sm:tracking-[0.28em]">
                     <span>Slider Control</span>
                     <span>
@@ -521,7 +564,7 @@ export default function App() {
 
                   <div className="relative px-1 pt-6">
                     <div
-                      className="pointer-events-none absolute top-0 z-20 -translate-x-1/2 rounded-full border border-neon/25 bg-ink/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-neonSoft shadow-neon backdrop-blur transition-all duration-300"
+                      className="pointer-events-none absolute top-0 z-20 -translate-x-1/2 rounded-full bg-ink/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-neonSoft shadow-neon backdrop-blur transition-all duration-300"
                       style={{ left: `${sliderProgress}%` }}
                     >
                       <div
@@ -546,8 +589,8 @@ export default function App() {
 
                     <div className="pointer-events-none absolute left-0 right-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-white/6" />
                     <div
-                      className={`pointer-events-none absolute left-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.55),rgba(123,200,255,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
-                        sliderDragging ? 'scale-y-[1.45]' : 'scale-y-100'
+                      className={`pointer-events-none absolute left-0 top-1/2 h-3 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.55),rgba(123,200,255,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
+                        sliderDragging ? 'scale-y-[1.65] scale-x-[1.01]' : 'scale-y-100'
                       }`}
                       style={{
                         width: `${sliderProgress}%`,
@@ -566,8 +609,9 @@ export default function App() {
                       onPointerUp={() => setSliderDragging(false)}
                       onPointerCancel={() => setSliderDragging(false)}
                       onMouseLeave={() => setSliderDragging(false)}
+                      onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
-                      className="featured-slider relative z-10 w-full"
+                      className="featured-slider featured-slider--thin relative z-10 w-full"
                     />
 
                     <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
