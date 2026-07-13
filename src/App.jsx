@@ -558,14 +558,14 @@ export default function App() {
                     Slider Control
                   </div>
 
-                  <div className="relative px-1 pt-6" ref={sliderTrackRef}>
-                    <div className="pointer-events-none absolute left-0 right-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-white/6" />
+                  <div className="relative px-1 py-6" ref={sliderTrackRef}>
+                    <div className="pointer-events-none absolute left-1 right-1 top-1/2 h-4 -translate-y-1/2 rounded-full bg-white/6" />
                     <div
-                      className={`pointer-events-none absolute left-0 top-1/2 h-3 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.55),rgba(123,200,255,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
+                      className={`pointer-events-none absolute left-1 top-1/2 h-3 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.55),rgba(123,200,255,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
                         sliderDragging ? 'scale-y-[1.65] scale-x-[1.01]' : 'scale-y-100'
                       }`}
                       style={{
-                        width: `${sliderProgress}%`,
+                        width: `calc(${sliderProgress}% - 0.5rem)`,
                         transformOrigin: 'left center',
                       }}
                     />
@@ -579,7 +579,7 @@ export default function App() {
                       onChange={(event) => setCarouselIndex(Number(event.target.value))}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
-                      className="featured-slider featured-slider--thin absolute inset-x-1 top-0 z-10 h-12 w-auto"
+                      className="featured-slider featured-slider--thin absolute inset-x-1 top-1/2 z-10 h-4 -translate-y-1/2"
                     />
 
                     <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
