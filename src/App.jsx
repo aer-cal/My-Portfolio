@@ -145,8 +145,8 @@ const aboutDetails = [
     ),
   },
   {
-    value: 'DTI Laguna',
-    label: 'Current Career',
+    value: 'Work and Tech',
+    label: 'Current Company',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
         <path d="M3.5 8.5h17v10h-17z" />
@@ -434,7 +434,7 @@ export default function App() {
           <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="rounded-[1.75rem] border border-white/5 bg-panel/80 p-7 shadow-[0_18px_50px_rgba(0,0,0,0.25)] backdrop-blur-sm sm:p-10">
               <p className="text-base leading-8 text-textmain md:text-lg">
-                Hi, I&apos;m Aer.Cal. I am 23 years old, currently open to opportunities, and working as an IT intern at DTI Laguna.
+                Hi, I&apos;m Aer.Cal. I am 23 years old, currently open to opportunities, and working as a Project-based Tech Support at Work and Tech.
               </p>
               <p className="mt-5 text-base leading-8 text-textmuted md:text-lg">
                 My current focus is on building practical experience in IT infrastructure, software development, and
