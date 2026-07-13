@@ -577,11 +577,6 @@ export default function App() {
                       step="1"
                       value={carouselIndex}
                       onChange={(event) => setCarouselIndex(Number(event.target.value))}
-                      onPointerDown={handleSliderPointerDown}
-                      onPointerMove={handleSliderPointerMove}
-                      onPointerUp={handleSliderPointerUp}
-                      onPointerCancel={handleSliderPointerUp}
-                      onLostPointerCapture={handleSliderPointerUp}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
                       className="featured-slider featured-slider--thin absolute inset-x-1 top-0 z-10 h-12 w-auto"
