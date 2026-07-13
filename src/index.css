@@ -164,3 +164,21 @@ body::before {
 .featured-slider:active {
   cursor: grabbing;
 }
+
+.featured-work-card {
+  animation: featured-work-enter 220ms ease-out;
+}
+
+@keyframes featured-work-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}

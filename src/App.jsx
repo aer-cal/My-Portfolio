@@ -522,7 +522,10 @@ export default function App() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
 
               <div className="relative">
-                <article className="overflow-hidden rounded-[1.35rem] border border-white/5 bg-[linear-gradient(180deg,rgba(13,19,32,0.94),rgba(8,12,20,0.98))] shadow-[0_18px_50px_rgba(0,0,0,0.25)]">
+                <article
+                  key={activeFeaturedWork.title}
+                  className="featured-work-card overflow-hidden rounded-[1.35rem] border border-white/5 bg-[linear-gradient(180deg,rgba(13,19,32,0.94),rgba(8,12,20,0.98))] shadow-[0_18px_50px_rgba(0,0,0,0.25)]"
+                >
                   <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
                     <div className="relative min-h-[260px] bg-[#07111f] sm:min-h-[320px] lg:min-h-[420px]">
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(123,200,255,0.16),transparent_58%)]" />
