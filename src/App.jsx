@@ -586,29 +586,6 @@ export default function App() {
                       }}
                     />
 
-                    <div
-                      className="absolute inset-0 z-10 cursor-pointer touch-none"
-                      onPointerDown={handleSliderPointerDown}
-                      onPointerMove={handleSliderPointerMove}
-                      onPointerUp={handleSliderPointerUp}
-                      onPointerCancel={handleSliderPointerUp}
-                      onLostPointerCapture={handleSliderPointerUp}
-                      aria-hidden="true"
-                    />
-
-                    <div
-                      className={`absolute top-1/2 z-20 h-[22px] w-[22px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-[radial-gradient(circle_at_30%_30%,rgba(129,214,255,0.98)_0%,rgba(63,169,255,0.98)_60%,rgba(16,28,48,1)_100%)] shadow-[0_0_0_4px_rgba(63,169,255,0.12),0_6px_16px_rgba(0,0,0,0.32),0_0_20px_rgba(63,169,255,0.42)] transition-transform duration-200 cursor-grab select-none touch-none ${
-                        sliderDragging ? 'scale-110 cursor-grabbing' : 'scale-100'
-                      }`}
-                      style={{ left: `${sliderProgress}%` }}
-                      onPointerDown={handleSliderPointerDown}
-                      onPointerMove={handleSliderPointerMove}
-                      onPointerUp={handleSliderPointerUp}
-                      onPointerCancel={handleSliderPointerUp}
-                      onLostPointerCapture={handleSliderPointerUp}
-                      aria-hidden="true"
-                    />
-
                     <input
                       type="range"
                       min="0"
@@ -618,7 +595,7 @@ export default function App() {
                       onChange={(event) => setCarouselIndex(Number(event.target.value))}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
-                      className="featured-slider featured-slider--thin absolute inset-0 z-0 h-[22px] w-full opacity-0"
+                      className="featured-slider featured-slider--thin absolute inset-0 z-10 h-[22px] w-full"
                     />
                   </div>
                 </div>
