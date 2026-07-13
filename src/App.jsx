@@ -228,43 +228,6 @@ export default function App() {
     }
   }
 
-  const updateSliderFromPointer = (clientX) => {
-    const track = sliderTrackRef.current
-    if (!track || sliderMax === 0) {
-      return
-    }
-
-    const rect = track.getBoundingClientRect()
-    const normalized = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width))
-    setCarouselIndex(Math.round(normalized * sliderMax))
-  }
-
-  const handleSliderPointerDown = (event) => {
-    if (sliderMax === 0) {
-      return
-    }
-
-    setSliderDragging(true)
-    event.currentTarget.setPointerCapture(event.pointerId)
-    updateSliderFromPointer(event.clientX)
-  }
-
-  const handleSliderPointerMove = (event) => {
-    if (!sliderDragging) {
-      return
-    }
-
-    updateSliderFromPointer(event.clientX)
-  }
-
-  const handleSliderPointerUp = (event) => {
-    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId)
-    }
-
-    setSliderDragging(false)
-  }
-
   useEffect(() => {
     const section = skillsSectionRef.current
     if (!section) {
@@ -621,7 +584,7 @@ export default function App() {
                       onLostPointerCapture={handleSliderPointerUp}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
-                      className="featured-slider featured-slider--thin relative z-10 w-full"
+                      className="featured-slider featured-slider--thin absolute inset-x-1 top-0 z-10 h-12 w-auto"
                     />
 
                     <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
