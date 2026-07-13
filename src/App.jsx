@@ -621,7 +621,7 @@ export default function App() {
                       onLostPointerCapture={handleSliderPointerUp}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
-                      className="featured-slider featured-slider--thin relative z-10 w-full opacity-0"
+                      className="featured-slider featured-slider--thin relative z-10 w-full"
                     />
 
                     <div

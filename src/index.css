@@ -88,6 +88,7 @@ body::before {
   height: 40px;
   background: transparent;
   cursor: pointer;
+  opacity: 1;
 }
 
 .featured-slider--thin {
@@ -111,41 +112,41 @@ body::before {
 .featured-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 26px;
-  height: 26px;
-  margin-top: -8px;
+  width: 22px;
+  height: 22px;
+  margin-top: -6px;
   border-radius: 9999px;
-  border: 1px solid rgba(123, 200, 255, 0.82);
+  border: 1px solid rgba(123, 200, 255, 0.68);
   background:
-    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.42) 26%, transparent 30%),
-    linear-gradient(180deg, rgba(14, 22, 36, 0.98), rgba(7, 10, 16, 0.99));
+    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.32) 26%, transparent 30%),
+    linear-gradient(180deg, rgba(14, 22, 36, 0.95), rgba(7, 10, 16, 0.98));
   box-shadow:
-    0 0 0 6px rgba(63, 169, 255, 0.12),
-    0 8px 22px rgba(0, 0, 0, 0.42),
-    0 0 22px rgba(63, 169, 255, 0.34);
+    0 0 0 4px rgba(63, 169, 255, 0.08),
+    0 6px 16px rgba(0, 0, 0, 0.32),
+    0 0 14px rgba(63, 169, 255, 0.22);
   position: relative;
 }
 
 .featured-slider::-moz-range-thumb {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   border-radius: 9999px;
-  border: 1px solid rgba(123, 200, 255, 0.82);
+  border: 1px solid rgba(123, 200, 255, 0.68);
   background:
-    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.42) 26%, transparent 30%),
-    linear-gradient(180deg, rgba(14, 22, 36, 0.98), rgba(7, 10, 16, 0.99));
+    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.32) 26%, transparent 30%),
+    linear-gradient(180deg, rgba(14, 22, 36, 0.95), rgba(7, 10, 16, 0.98));
   box-shadow:
-    0 0 0 6px rgba(63, 169, 255, 0.12),
-    0 8px 22px rgba(0, 0, 0, 0.42),
-    0 0 22px rgba(63, 169, 255, 0.34);
+    0 0 0 4px rgba(63, 169, 255, 0.08),
+    0 6px 16px rgba(0, 0, 0, 0.32),
+    0 0 14px rgba(63, 169, 255, 0.22);
 }
 
 .featured-slider:active::-webkit-slider-thumb {
-  transform: scale(1.14);
+  transform: scale(1.1);
 }
 
 .featured-slider:active::-moz-range-thumb {
-  transform: scale(1.14);
+  transform: scale(1.1);
 }
 
 .featured-slider::-webkit-slider-thumb::before,
@@ -156,9 +157,9 @@ body::before {
 .featured-slider::-webkit-slider-thumb:hover,
 .featured-slider::-moz-range-thumb:hover {
   box-shadow:
-    0 0 0 8px rgba(63, 169, 255, 0.16),
-    0 10px 26px rgba(0, 0, 0, 0.46),
-    0 0 28px rgba(63, 169, 255, 0.46);
+    0 0 0 5px rgba(63, 169, 255, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.38),
+    0 0 18px rgba(63, 169, 255, 0.3);
 }
 
 .featured-slider::-webkit-slider-thumb:active,
