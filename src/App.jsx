@@ -181,7 +181,12 @@ export default function App() {
   const [animateSkillBars, setAnimateSkillBars] = useState(false)
   const [activePhotoIndex, setActivePhotoIndex] = useState(0)
   const [carouselIndex, setCarouselIndex] = useState(0)
+  const [sliderDragging, setSliderDragging] = useState(false)
   const skillsSectionRef = useRef(null)
+  const sliderMax = Math.max(featuredWorks.length - 1, 0)
+  const sliderProgress = sliderMax === 0 ? 0 : (carouselIndex / sliderMax) * 100
+  const sliderValueLabel = String(carouselIndex + 1).padStart(2, '0')
+  const sliderTotalLabel = String(featuredWorks.length).padStart(2, '0')
 
   useEffect(() => {
     const section = skillsSectionRef.current
@@ -438,16 +443,7 @@ export default function App() {
             <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] border border-white/6 bg-panel/80 p-4 shadow-neon sm:p-6">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
 
-              <div className="relative flex items-center gap-4 sm:gap-5">
-                <button
-                  type="button"
-                  onClick={() => setCarouselIndex((i) => (i - 1 + featuredWorks.length) % featuredWorks.length)}
-                  className="z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/8 bg-ink/75 text-xl text-textmain backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:text-neonSoft"
-                  aria-label="Previous slide"
-                >
-                  ‹
-                </button>
-
+              <div className="relative">
                 <div className="relative min-w-0 flex-1 overflow-hidden rounded-[1.25rem] border border-white/6 bg-ink/60">
                   <div
                     className="flex transition-transform duration-700 ease-in-out"
@@ -461,7 +457,7 @@ export default function App() {
                             <img
                               src={work.image}
                               alt={work.title}
-                              className="absolute inset-0 h-full w-full object-contain p-4 sm:p-6 lg:p-8"
+                              className="absolute inset-0 h-full w-full object-contain object-center p-4 sm:p-6 lg:p-8"
                             />
                           </div>
 
@@ -515,28 +511,71 @@ export default function App() {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setCarouselIndex((i) => (i + 1) % featuredWorks.length)}
-                  className="z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/8 bg-ink/75 text-xl text-textmain backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-neon/30 hover:bg-neon/10 hover:text-neonSoft"
-                  aria-label="Next slide"
-                >
-                  ›
-                </button>
-              </div>
+                <div className="mt-5 rounded-[1.35rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,19,32,0.92),rgba(8,12,20,0.94))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-5">
+                  <div className="mb-4 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.22em] text-textmuted sm:text-sm sm:tracking-[0.28em]">
+                    <span>Slider Control</span>
+                    <span>
+                      {sliderValueLabel} / {sliderTotalLabel}
+                    </span>
+                  </div>
 
-              <div className="relative mt-5 flex items-center justify-center gap-3">
-                {featuredWorks.map((work, index) => (
-                  <button
-                    key={work.title}
-                    type="button"
-                    onClick={() => setCarouselIndex(index)}
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
-                      index === carouselIndex ? 'w-10 bg-neon shadow-neon' : 'w-2.5 bg-white/25 hover:bg-white/45'
-                    }`}
-                    aria-label={`Show ${work.title}`}
-                  />
-                ))}
+                  <div className="relative px-1 pt-6">
+                    <div
+                      className="pointer-events-none absolute top-0 z-20 -translate-x-1/2 rounded-full border border-neon/25 bg-ink/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-neonSoft shadow-neon backdrop-blur transition-all duration-300"
+                      style={{ left: `${sliderProgress}%` }}
+                    >
+                      <div
+                        className="overflow-hidden"
+                        style={{
+                          WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%)',
+                          maskImage: 'linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%)',
+                        }}
+                      >
+                        <div
+                          className="flex flex-col leading-none transition-transform duration-300 ease-out"
+                          style={{ transform: `translateY(-${carouselIndex * 100}%)` }}
+                        >
+                          {featuredWorks.map((work, index) => (
+                            <span key={work.title} className="h-4">
+                              {String(index + 1).padStart(2, '0')}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pointer-events-none absolute left-0 right-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-white/6" />
+                    <div
+                      className={`pointer-events-none absolute left-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.55),rgba(123,200,255,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
+                        sliderDragging ? 'scale-y-[1.45]' : 'scale-y-100'
+                      }`}
+                      style={{
+                        width: `${sliderProgress}%`,
+                        transformOrigin: 'left center',
+                      }}
+                    />
+
+                    <input
+                      type="range"
+                      min="0"
+                      max={sliderMax}
+                      step="1"
+                      value={carouselIndex}
+                      onChange={(event) => setCarouselIndex(Number(event.target.value))}
+                      onPointerDown={() => setSliderDragging(true)}
+                      onPointerUp={() => setSliderDragging(false)}
+                      onPointerCancel={() => setSliderDragging(false)}
+                      onMouseLeave={() => setSliderDragging(false)}
+                      aria-label="Featured work slider"
+                      className="featured-slider relative z-10 w-full"
+                    />
+
+                    <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
+                      <span>{featuredWorks[0].title}</span>
+                      <span>{featuredWorks[featuredWorks.length - 1].title}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
