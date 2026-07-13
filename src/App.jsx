@@ -186,8 +186,6 @@ export default function App() {
   const sliderTrackRef = useRef(null)
   const sliderMax = Math.max(featuredWorks.length - 1, 0)
   const sliderProgress = sliderMax === 0 ? 0 : (carouselIndex / sliderMax) * 100
-  const sliderValueLabel = String(carouselIndex + 1).padStart(2, '0')
-  const sliderTotalLabel = String(featuredWorks.length).padStart(2, '0')
 
   const moveSlider = (direction) => {
     setCarouselIndex((current) => {
@@ -593,38 +591,11 @@ export default function App() {
                 </div>
 
                 <div className="mt-5 rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(13,19,32,0.92),rgba(8,12,20,0.94))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-5">
-                  <div className="mb-4 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.22em] text-textmuted sm:text-sm sm:tracking-[0.28em]">
-                    <span>Slider Control</span>
-                    <span>
-                      {sliderValueLabel} / {sliderTotalLabel}
-                    </span>
+                  <div className="mb-4 text-xs uppercase tracking-[0.22em] text-textmuted sm:text-sm sm:tracking-[0.28em]">
+                    Slider Control
                   </div>
 
                   <div className="relative px-1 pt-6" ref={sliderTrackRef}>
-                    <div
-                      className="pointer-events-none absolute top-0 z-20 -translate-x-1/2 rounded-full bg-ink/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-neonSoft shadow-neon backdrop-blur transition-all duration-300"
-                      style={{ left: `${sliderProgress}%` }}
-                    >
-                      <div
-                        className="overflow-hidden"
-                        style={{
-                          WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%)',
-                          maskImage: 'linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%)',
-                        }}
-                      >
-                        <div
-                          className="flex flex-col leading-none transition-transform duration-300 ease-out"
-                          style={{ transform: `translateY(-${carouselIndex * 100}%)` }}
-                        >
-                          {featuredWorks.map((work, index) => (
-                            <span key={work.title} className="h-4">
-                              {String(index + 1).padStart(2, '0')}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
                     <div className="pointer-events-none absolute left-0 right-0 top-1/2 h-4 -translate-y-1/2 rounded-full bg-white/6" />
                     <div
                       className={`pointer-events-none absolute left-0 top-1/2 h-3 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.55),rgba(123,200,255,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
@@ -636,16 +607,6 @@ export default function App() {
                       }}
                     />
 
-                    <div
-                      className="absolute inset-x-0 top-0 z-20 h-12 rounded-full"
-                      onPointerDown={handleSliderPointerDown}
-                      onPointerMove={handleSliderPointerMove}
-                      onPointerUp={handleSliderPointerUp}
-                      onPointerCancel={handleSliderPointerUp}
-                      onLostPointerCapture={handleSliderPointerUp}
-                      role="presentation"
-                    />
-
                     <input
                       type="range"
                       min="0"
@@ -653,9 +614,24 @@ export default function App() {
                       step="1"
                       value={carouselIndex}
                       onChange={(event) => setCarouselIndex(Number(event.target.value))}
+                      onPointerDown={handleSliderPointerDown}
+                      onPointerMove={handleSliderPointerMove}
+                      onPointerUp={handleSliderPointerUp}
+                      onPointerCancel={handleSliderPointerUp}
+                      onLostPointerCapture={handleSliderPointerUp}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
                       className="featured-slider featured-slider--thin relative z-10 w-full opacity-0"
+                    />
+
+                    <div
+                      className="absolute inset-x-0 top-0 z-20 h-12 cursor-grab select-none touch-none rounded-full active:cursor-grabbing"
+                      onPointerDown={handleSliderPointerDown}
+                      onPointerMove={handleSliderPointerMove}
+                      onPointerUp={handleSliderPointerUp}
+                      onPointerCancel={handleSliderPointerUp}
+                      onLostPointerCapture={handleSliderPointerUp}
+                      aria-hidden="true"
                     />
 
                     <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
