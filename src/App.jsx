@@ -521,6 +521,54 @@ export default function App() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
 
               <div className="relative">
+                <div className="grid gap-4 lg:grid-cols-2">
+                  {featuredWorks.map((work, index) => (
+                    <article
+                      key={work.title}
+                      className={`overflow-hidden rounded-[1.35rem] border bg-[linear-gradient(180deg,rgba(13,19,32,0.94),rgba(8,12,20,0.98))] transition-all duration-300 ${
+                        carouselIndex === index ? 'border-neon/35 shadow-neon' : 'border-white/5'
+                      }`}
+                    >
+                      <div className="relative min-h-[260px] bg-[#07111f] sm:min-h-[320px]">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(123,200,255,0.16),transparent_58%)]" />
+                        <img
+                          src={work.image}
+                          alt={work.title}
+                          className="absolute inset-0 h-full w-full object-contain object-center p-4 sm:p-6"
+                        />
+                      </div>
+
+                      <div className="space-y-4 p-5 sm:p-6">
+                        <div className="inline-flex rounded-full bg-neon/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-neonSoft">
+                          Featured Project
+                        </div>
+                        <h3 className="text-2xl font-semibold text-textmain sm:text-3xl">{work.title}</h3>
+                        <p className="text-sm leading-7 text-textmuted sm:text-base sm:leading-8">{work.summary}</p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {work.stack.map((stackItem) => (
+                            <span
+                              key={stackItem}
+                              className="rounded-full border border-white/8 bg-white/5 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-textmain"
+                            >
+                              {stackItem}
+                            </span>
+                          ))}
+                        </div>
+
+                        <a
+                          href={work.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex w-fit items-center justify-center rounded-full border border-neon bg-neon px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
+                        >
+                          View Repository
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+
                 <div className="mt-5 rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(13,19,32,0.92),rgba(8,12,20,0.94))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-5">
                   <div className="mb-4 text-xs uppercase tracking-[0.22em] text-textmuted sm:text-sm sm:tracking-[0.28em]">
                     Slider Control
@@ -572,11 +620,6 @@ export default function App() {
                       aria-label="Featured work slider"
                       className="featured-slider featured-slider--thin absolute inset-0 z-0 h-[22px] w-full opacity-0"
                     />
-
-                    <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
-                      <span>{featuredWorks[0].title}</span>
-                      <span>{featuredWorks[featuredWorks.length - 1].title}</span>
-                    </div>
                   </div>
                 </div>
               </div>
