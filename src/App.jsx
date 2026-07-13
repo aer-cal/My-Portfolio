@@ -624,16 +624,6 @@ export default function App() {
                       className="featured-slider featured-slider--thin relative z-10 w-full"
                     />
 
-                    <div
-                      className="absolute inset-x-0 top-0 z-20 h-12 cursor-grab select-none touch-none rounded-full active:cursor-grabbing"
-                      onPointerDown={handleSliderPointerDown}
-                      onPointerMove={handleSliderPointerMove}
-                      onPointerUp={handleSliderPointerUp}
-                      onPointerCancel={handleSliderPointerUp}
-                      onLostPointerCapture={handleSliderPointerUp}
-                      aria-hidden="true"
-                    />
-
                     <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
                       <span>{featuredWorks[0].title}</span>
                       <span>{featuredWorks[featuredWorks.length - 1].title}</span>
