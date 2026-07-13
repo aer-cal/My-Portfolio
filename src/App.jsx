@@ -183,6 +183,7 @@ export default function App() {
   const [carouselIndex, setCarouselIndex] = useState(0)
   const [sliderDragging, setSliderDragging] = useState(false)
   const skillsSectionRef = useRef(null)
+  const sliderTrackRef = useRef(null)
   const sliderMax = Math.max(featuredWorks.length - 1, 0)
   const sliderProgress = sliderMax === 0 ? 0 : (carouselIndex / sliderMax) * 100
   const sliderValueLabel = String(carouselIndex + 1).padStart(2, '0')
@@ -227,6 +228,43 @@ export default function App() {
       event.preventDefault()
       setCarouselIndex(sliderMax)
     }
+  }
+
+  const updateSliderFromPointer = (clientX) => {
+    const track = sliderTrackRef.current
+    if (!track || sliderMax === 0) {
+      return
+    }
+
+    const rect = track.getBoundingClientRect()
+    const normalized = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width))
+    setCarouselIndex(Math.round(normalized * sliderMax))
+  }
+
+  const handleSliderPointerDown = (event) => {
+    if (sliderMax === 0) {
+      return
+    }
+
+    setSliderDragging(true)
+    event.currentTarget.setPointerCapture(event.pointerId)
+    updateSliderFromPointer(event.clientX)
+  }
+
+  const handleSliderPointerMove = (event) => {
+    if (!sliderDragging) {
+      return
+    }
+
+    updateSliderFromPointer(event.clientX)
+  }
+
+  const handleSliderPointerUp = (event) => {
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+
+    setSliderDragging(false)
   }
 
   useEffect(() => {
@@ -562,7 +600,7 @@ export default function App() {
                     </span>
                   </div>
 
-                  <div className="relative px-1 pt-6">
+                  <div className="relative px-1 pt-6" ref={sliderTrackRef}>
                     <div
                       className="pointer-events-none absolute top-0 z-20 -translate-x-1/2 rounded-full bg-ink/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-neonSoft shadow-neon backdrop-blur transition-all duration-300"
                       style={{ left: `${sliderProgress}%` }}
@@ -598,6 +636,16 @@ export default function App() {
                       }}
                     />
 
+                    <div
+                      className="absolute inset-x-0 top-0 z-20 h-12 rounded-full"
+                      onPointerDown={handleSliderPointerDown}
+                      onPointerMove={handleSliderPointerMove}
+                      onPointerUp={handleSliderPointerUp}
+                      onPointerCancel={handleSliderPointerUp}
+                      onLostPointerCapture={handleSliderPointerUp}
+                      role="presentation"
+                    />
+
                     <input
                       type="range"
                       min="0"
@@ -605,13 +653,9 @@ export default function App() {
                       step="1"
                       value={carouselIndex}
                       onChange={(event) => setCarouselIndex(Number(event.target.value))}
-                      onPointerDown={() => setSliderDragging(true)}
-                      onPointerUp={() => setSliderDragging(false)}
-                      onPointerCancel={() => setSliderDragging(false)}
-                      onMouseLeave={() => setSliderDragging(false)}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
-                      className="featured-slider featured-slider--thin relative z-10 w-full"
+                      className="featured-slider featured-slider--thin relative z-10 w-full opacity-0"
                     />
 
                     <div className="mt-3 flex items-center justify-between text-[0.62rem] uppercase tracking-[0.2em] text-textmuted sm:text-xs sm:tracking-[0.26em]">
