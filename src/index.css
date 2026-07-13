@@ -26,10 +26,9 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(63, 169, 255, 0.14), transparent 30%),
-    radial-gradient(circle at top right, rgba(123, 200, 255, 0.08), transparent 24%),
-    linear-gradient(180deg, #05070b 0%, #070b12 42%, #05070b 100%);
-  color: #e5eefc;
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent 30%),
+    linear-gradient(180deg, #050505 0%, #0a0a0a 42%, #050505 100%);
+  color: #f3f3f3;
   font-family: Bahnschrift, 'Segoe UI', sans-serif;
 }
 
@@ -43,15 +42,15 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(63, 169, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(63, 169, 255, 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(circle at center, black, transparent 82%);
-  opacity: 0.45;
+    radial-gradient(circle at center, transparent 0 17%, rgba(255, 255, 255, 0.03) 17.4%, transparent 17.8%),
+    radial-gradient(circle at center, transparent 0 31%, rgba(255, 255, 255, 0.028) 31.3%, transparent 31.7%),
+    radial-gradient(circle at center, transparent 0 46%, rgba(255, 255, 255, 0.022) 46.2%, transparent 46.6%),
+    radial-gradient(circle at center, transparent 0 62%, rgba(255, 255, 255, 0.016) 62.2%, transparent 62.6%);
+  opacity: 0.8;
 }
 
 ::selection {
-  background: rgba(63, 169, 255, 0.35);
+  background: rgba(255, 255, 255, 0.22);
   color: #f4f9ff;
 }
 
@@ -62,7 +61,7 @@ body::before {
   z-index: 1;
   background: radial-gradient(
     var(--cursor-size) circle at var(--cursor-x) var(--cursor-y),
-    rgba(63, 169, 255, var(--cursor-strength)),
+    rgba(255, 255, 255, var(--cursor-strength)),
     transparent 62%
   );
   transition: background 140ms ease-out;
@@ -70,8 +69,7 @@ body::before {
 
 @media (max-width: 640px) {
   body::before {
-    background-size: 40px 40px;
-    opacity: 0.3;
+    opacity: 0.55;
   }
 }
 
@@ -167,6 +165,13 @@ body::before {
 
 .featured-work-card {
   animation: featured-work-enter 220ms ease-out;
+}
+
+.theme-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
 }
 
 @keyframes featured-work-enter {

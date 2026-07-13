@@ -341,7 +341,9 @@ export default function App() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-ink text-textmain selection:bg-neon selection:text-ink">
       <div className="cursor-spotlight" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.18),transparent_30%),radial-gradient(circle_at_top_right,rgba(123,200,255,0.1),transparent_24%),linear-gradient(to_bottom,rgba(5,7,11,0.3),rgba(5,7,11,0.96))]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_30%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_24%),linear-gradient(to_bottom,rgba(5,5,5,0.25),rgba(5,5,5,0.96))]" />
+      <div className="theme-ring left-1/2 top-[14%] h-[26rem] w-[26rem] -translate-x-1/2 border-white/5" />
+      <div className="theme-ring left-1/2 top-[22%] h-[40rem] w-[40rem] -translate-x-1/2 border-white/[0.04]" />
       <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-ink/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-8 sm:py-5 lg:px-12">
           <a href="#home" className="text-xl font-semibold tracking-[0.2em] text-textmain sm:text-2xl sm:tracking-[0.28em]">
@@ -406,8 +408,8 @@ export default function App() {
           </div>
 
           <div className="w-full max-w-sm sm:max-w-md lg:w-2/5">
-            <div className="group relative overflow-hidden rounded-[2rem] border border-neon/20 bg-panel/85 p-3 shadow-neon backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-neon/40 hover:shadow-[0_0_32px_rgba(63,169,255,0.42)]">
-              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(63,169,255,0.14),transparent_40%,transparent_60%,rgba(63,169,255,0.08))]" />
+            <div className="group relative overflow-hidden rounded-[2rem] border border-neon/20 bg-panel/85 p-3 shadow-neon backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:border-neon/40 hover:shadow-[0_0_32px_rgba(255,255,255,0.22)]">
+              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),transparent_40%,transparent_60%,rgba(255,255,255,0.03))]" />
               <div className="relative h-[320px] w-full overflow-hidden rounded-[1.5rem] sm:h-[380px] md:h-[420px]">
                 {heroPhotos.map((photo, index) => (
                   <img
@@ -497,7 +499,7 @@ export default function App() {
                   </div>
                   <div className="h-2.5 w-full overflow-hidden rounded-full bg-ink/80">
                     <div
-                      className="h-full rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.5),rgba(123,200,255,0.95))] shadow-neon transition-all duration-1000 ease-out group-hover:brightness-110"
+                      className="h-full rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0.45),rgba(245,245,245,0.96))] shadow-neon transition-all duration-1000 ease-out group-hover:brightness-110"
                       style={{
                         width: animateSkillBars
                           ? `${Math.min(
@@ -519,7 +521,7 @@ export default function App() {
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
             <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] bg-panel/80 p-4 shadow-neon sm:p-6">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(63,169,255,0.14),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.1),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
 
               <div className="relative">
                 <article
@@ -528,7 +530,7 @@ export default function App() {
                 >
                   <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
                     <div className="relative min-h-[260px] bg-[#07111f] sm:min-h-[320px] lg:min-h-[420px]">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(123,200,255,0.16),transparent_58%)]" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_58%)]" />
                       <img
                         src={activeFeaturedWork.image}
                         alt={activeFeaturedWork.title}
@@ -591,7 +593,7 @@ export default function App() {
                   <div className="relative py-6" ref={sliderTrackRef}>
                     <div className="pointer-events-none absolute inset-x-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-white/6" />
                     <div
-                      className={`pointer-events-none absolute left-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(63,169,255,0.55),rgba(123,200,255,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
+                      className={`pointer-events-none absolute left-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0.55),rgba(245,245,245,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
                         sliderDragging ? 'scale-y-[1.4] scale-x-[1.01]' : 'scale-y-100'
                       }`}
                       style={{
@@ -627,7 +629,7 @@ export default function App() {
                 href={badge.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(63,169,255,0.08),rgba(13,19,32,0.9))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(63,169,255,0.35)] sm:p-8 cursor-pointer"
+                className="group rounded-[1.75rem] border border-neon/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(16,16,16,0.92))] p-6 shadow-neon transition-all duration-300 hover:-translate-y-1 hover:border-neon/35 hover:shadow-[0_0_34px_rgba(255,255,255,0.2)] sm:p-8 cursor-pointer"
               >
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-ink/80 overflow-hidden transition-all duration-300 group-hover:scale-110">
                   <img src={badge.icon} alt={badge.title} className="h-full w-full object-contain p-1" />
@@ -676,7 +678,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] border border-neon/15 bg-[radial-gradient(circle_at_top_right,rgba(63,169,255,0.16),transparent_38%),linear-gradient(180deg,rgba(17,25,42,0.95),rgba(7,10,16,0.95))] p-6 shadow-neon sm:p-10">
+            <div className="rounded-[1.75rem] border border-neon/15 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent_38%),linear-gradient(180deg,rgba(18,18,18,0.95),rgba(7,7,7,0.95))] p-6 shadow-neon sm:p-10">
               <p className="text-[0.65rem] uppercase tracking-[0.18em] text-neonSoft sm:text-xs sm:tracking-[0.28em]">Ready for collaboration</p>
               <h3 className="mt-4 text-2xl font-semibold text-textmain sm:text-3xl md:text-4xl">
                 Ready to build a cleaner digital identity?
