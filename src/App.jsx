@@ -388,7 +388,7 @@ export default function App() {
               AARON L. CALUPITAN
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-textmuted sm:text-lg sm:leading-8 md:text-xl">
-              IT Professional &amp; a IT Graduate. Specializing in Software Development, IT Infrastructure.
+              IT Professional &amp; IT Graduate. Specializing in Software Development, IT Infrastructure.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
