@@ -388,7 +388,7 @@ export default function App() {
               AARON L. CALUPITAN
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-textmuted sm:text-lg sm:leading-8 md:text-xl">
-              IT Professional &amp; Graduating IT Student (Aer.Cal). Specializing in Software Development, IT Infrastructure.
+              IT Professional &amp; a IT Graduate. Specializing in Software Development, IT Infrastructure.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
@@ -520,17 +520,17 @@ export default function App() {
         <section id="featured-work" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-20 lg:px-12">
           <h2 className={sectionTitleClass}>Featured Work</h2>
           <div className="mb-8">
-            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] bg-panel/80 p-4 shadow-neon sm:p-6">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.1),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]" />
+            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(18,18,18,0.96),rgba(10,10,10,0.98))] p-4 shadow-neon sm:p-6">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.025),transparent)]" />
 
               <div className="relative">
                 <article
                   key={activeFeaturedWork.title}
-                  className="featured-work-card overflow-hidden rounded-[1.35rem] border border-white/5 bg-[linear-gradient(180deg,rgba(13,19,32,0.94),rgba(8,12,20,0.98))] shadow-[0_18px_50px_rgba(0,0,0,0.25)]"
+                  className="featured-work-card overflow-hidden rounded-[1.35rem] border border-white/6 bg-[linear-gradient(180deg,rgba(22,22,22,0.98),rgba(10,10,10,0.98))] shadow-[0_18px_50px_rgba(0,0,0,0.3)]"
                 >
                   <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
-                    <div className="relative min-h-[260px] bg-[#07111f] sm:min-h-[320px] lg:min-h-[420px]">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_58%)]" />
+                    <div className="relative min-h-[260px] bg-[linear-gradient(180deg,rgba(16,16,16,0.98),rgba(7,7,7,0.98))] sm:min-h-[320px] lg:min-h-[420px]">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_58%)]" />
                       <img
                         src={activeFeaturedWork.image}
                         alt={activeFeaturedWork.title}
@@ -538,9 +538,9 @@ export default function App() {
                       />
                     </div>
 
-                    <div className="flex flex-col justify-between gap-6 bg-[linear-gradient(180deg,rgba(10,16,28,0.98),rgba(10,16,28,0.86))] p-5 sm:p-7 lg:p-8">
+                    <div className="flex flex-col justify-between gap-6 bg-[linear-gradient(180deg,rgba(15,15,15,0.98),rgba(9,9,9,0.92))] p-5 sm:p-7 lg:p-8">
                       <div>
-                        <div className="mb-3 inline-flex rounded-full bg-neon/10 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-neonSoft">
+                        <div className="mb-3 inline-flex rounded-full border border-white/8 bg-white/5 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-textmuted">
                           Featured Project
                         </div>
                         <h3 className="text-2xl font-semibold text-textmain sm:text-3xl">{activeFeaturedWork.title}</h3>
@@ -554,7 +554,7 @@ export default function App() {
                           {activeFeaturedWork.stack.map((stackItem) => (
                             <span
                               key={stackItem}
-                              className="rounded-full border border-white/8 bg-white/5 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-textmain"
+                              className="rounded-full border border-white/8 bg-white/5 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-textmuted"
                             >
                               {stackItem}
                             </span>
@@ -565,7 +565,7 @@ export default function App() {
                           {activeFeaturedWork.highlights.map((highlight) => (
                             <span
                               key={highlight}
-                              className="rounded-full border border-neon/15 bg-neon/8 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-neonSoft"
+                              className="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-[0.68rem] uppercase tracking-[0.12em] text-textmain"
                             >
                               {highlight}
                             </span>
@@ -576,7 +576,7 @@ export default function App() {
                           href={activeFeaturedWork.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex w-fit items-center justify-center rounded-full border border-neon bg-neon px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:bg-neonSoft"
+                          className="inline-flex w-fit items-center justify-center rounded-full border border-white/10 bg-white/10 px-5 py-2.5 text-sm font-semibold text-textmain transition-all duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/15"
                         >
                           View Repository
                         </a>
@@ -585,7 +585,7 @@ export default function App() {
                   </div>
                 </article>
 
-                <div className="mt-5 rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(13,19,32,0.92),rgba(8,12,20,0.94))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-5">
+                <div className="mt-5 rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(18,18,18,0.95),rgba(10,10,10,0.96))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:p-5">
                   <div className="mb-4 text-xs uppercase tracking-[0.22em] text-textmuted sm:text-sm sm:tracking-[0.28em]">
                     Slider Control
                   </div>
@@ -593,7 +593,7 @@ export default function App() {
                   <div className="relative py-6" ref={sliderTrackRef}>
                     <div className="pointer-events-none absolute inset-x-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-white/6" />
                     <div
-                      className={`pointer-events-none absolute left-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0.55),rgba(245,245,245,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
+                      className={`pointer-events-none absolute left-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0.45),rgba(240,240,240,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
                         sliderDragging ? 'scale-y-[1.4] scale-x-[1.01]' : 'scale-y-100'
                       }`}
                       style={{
