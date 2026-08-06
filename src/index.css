@@ -147,11 +147,14 @@ body::before {
 }
 
 .featured-slider:active::-webkit-slider-thumb {
-  transform: scale(1.1);
+  /* preserve vertical centering while scaling */
+  transform: translateY(var(--featured-thumb-offset)) scale(1.1);
+  -webkit-transform: translateY(var(--featured-thumb-offset)) scale(1.1);
 }
 
 .featured-slider:active::-moz-range-thumb {
-  transform: scale(1.1);
+  /* preserve vertical centering while scaling */
+  transform: translateY(var(--featured-thumb-offset)) scale(1.1);
 }
 
 .featured-slider::-webkit-slider-thumb::before,
