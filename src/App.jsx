@@ -184,6 +184,9 @@ export default function App() {
   const [sliderDragging, setSliderDragging] = useState(false)
   const skillsSectionRef = useRef(null)
   const sliderTrackRef = useRef(null)
+  const sliderDraggingRef = useRef(false)
+  const sliderFrameRef = useRef(null)
+  const sliderPendingClientXRef = useRef(null)
   const sliderMax = Math.max(featuredWorks.length - 1, 0)
   const sliderProgress = sliderMax === 0 ? 0 : (carouselIndex / sliderMax) * 100
   const activeFeaturedWork = featuredWorks[carouselIndex]
@@ -240,22 +243,45 @@ export default function App() {
     setCarouselIndex(Math.round(normalized * sliderMax))
   }
 
+  const flushSliderPointerUpdate = () => {
+    sliderFrameRef.current = null
+
+    if (sliderPendingClientXRef.current == null) {
+      return
+    }
+
+    const clientX = sliderPendingClientXRef.current
+    sliderPendingClientXRef.current = null
+    updateSliderFromPointer(clientX)
+  }
+
+  const scheduleSliderPointerUpdate = (clientX) => {
+    sliderPendingClientXRef.current = clientX
+
+    if (sliderFrameRef.current != null) {
+      return
+    }
+
+    sliderFrameRef.current = window.requestAnimationFrame(flushSliderPointerUpdate)
+  }
+
   const handleSliderPointerDown = (event) => {
     if (sliderMax === 0) {
       return
     }
 
+    sliderDraggingRef.current = true
     setSliderDragging(true)
     event.currentTarget.setPointerCapture(event.pointerId)
-    updateSliderFromPointer(event.clientX)
+    scheduleSliderPointerUpdate(event.clientX)
   }
 
   const handleSliderPointerMove = (event) => {
-    if (!sliderDragging) {
+    if (!sliderDraggingRef.current) {
       return
     }
 
-    updateSliderFromPointer(event.clientX)
+    scheduleSliderPointerUpdate(event.clientX)
   }
 
   const handleSliderPointerUp = (event) => {
@@ -263,8 +289,17 @@ export default function App() {
       event.currentTarget.releasePointerCapture(event.pointerId)
     }
 
+    sliderDraggingRef.current = false
     setSliderDragging(false)
   }
+
+  useEffect(() => {
+    return () => {
+      if (sliderFrameRef.current != null) {
+        window.cancelAnimationFrame(sliderFrameRef.current)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const section = skillsSectionRef.current
@@ -380,7 +415,7 @@ export default function App() {
           className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center gap-10 px-4 pb-14 pt-36 sm:gap-12 sm:px-8 sm:pt-32 lg:flex-row lg:items-center lg:justify-between lg:px-12"
         >
           <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-neon/20 bg-panel/80 px-3 py-2 text-[0.62rem] uppercase tracking-[0.16em] text-neonSoft shadow-neon backdrop-blur sm:px-4 sm:text-xs sm:tracking-[0.28em]">
+            <div className="mb-git 6 inline-flex items-center gap-3 rounded-full border border-neon/20 bg-panel/80 px-3 py-2 text-[0.62rem] uppercase tracking-[0.16em] text-neonSoft shadow-neon backdrop-blur sm:px-4 sm:text-xs sm:tracking-[0.28em]">
               <span className="h-2 w-2 rounded-full bg-neon shadow-neon" />
               System Admin & Security Ready
             </div>
@@ -593,11 +628,10 @@ export default function App() {
                   <div className="relative py-6" ref={sliderTrackRef}>
                     <div className="pointer-events-none absolute inset-x-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-white/6" />
                     <div
-                      className={`pointer-events-none absolute left-0 top-1/2 h-[6px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0.45),rgba(240,240,240,0.95))] shadow-neon transition-[width,transform,border-radius] duration-300 ease-out ${
-                        sliderDragging ? 'scale-y-[1.4] scale-x-[1.01]' : 'scale-y-100'
-                      }`}
+                      className="pointer-events-none absolute left-0 top-1/2 h-[6px] rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0.45),rgba(240,240,240,0.95))] shadow-neon"
                       style={{
-                        width: `${sliderProgress}%`,
+                        width: '100%',
+                        transform: `translateY(-50%) scaleX(${sliderProgress / 100}) scaleY(${sliderDragging ? 1.4 : 1})`,
                         transformOrigin: 'left center',
                       }}
                     />
@@ -609,6 +643,10 @@ export default function App() {
                       step="1"
                       value={carouselIndex}
                       onChange={(event) => setCarouselIndex(Number(event.target.value))}
+                      onPointerDown={handleSliderPointerDown}
+                      onPointerMove={handleSliderPointerMove}
+                      onPointerUp={handleSliderPointerUp}
+                      onPointerCancel={handleSliderPointerUp}
                       onKeyDown={handleSliderKeyDown}
                       aria-label="Featured work slider"
                       className="featured-slider featured-slider--thin absolute inset-0 z-10 h-[22px] w-full"
