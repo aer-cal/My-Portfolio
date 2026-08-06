@@ -88,6 +88,10 @@ body::before {
   cursor: grab;
   opacity: 1;
   touch-action: pan-x;
+  /* track & thumb sizing for consistent vertical alignment */
+  --featured-track-h: 4px;
+  --featured-thumb-size: 22px;
+  --featured-thumb-offset: calc((var(--featured-track-h) - var(--featured-thumb-size)) / 2);
 }
 
 .featured-slider--thin {
@@ -113,7 +117,9 @@ body::before {
   appearance: none;
   width: 22px;
   height: 22px;
-  margin-top: -9px;
+  /* vertically center the thumb over the track */
+  transform: translateY(var(--featured-thumb-offset));
+  -webkit-transform: translateY(var(--featured-thumb-offset));
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.42);
   background: linear-gradient(135deg, #e8e8e8 0%, #cfcfcf 42%, #b4b4b4 72%, #9e9e9e 100%);
@@ -131,6 +137,8 @@ body::before {
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.42);
   background: linear-gradient(135deg, #e8e8e8 0%, #cfcfcf 42%, #b4b4b4 72%, #9e9e9e 100%);
+  /* Firefox requires transform to vertically center the thumb */
+  transform: translateY(var(--featured-thumb-offset));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.7),
     0 6px 16px rgba(0, 0, 0, 0.32),

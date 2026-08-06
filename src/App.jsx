@@ -170,7 +170,7 @@ const aboutDetails = [
 const heroPhotos = [
   { src: `${basePath}assets/image_4215ea.png`, position: '52% 30%' },
   { src: `${basePath}assets/1000075972.jpg`, position: '56% 24%' },
-  { src: `${basePath}assets/1000079942.png`, position: '50% 12%' },
+  { src: `${basePath}assets/Picsart_26-07-02_17-41-36-122.png`, position: '50% 12%' },
 ]
 
 const sectionTitleClass =
